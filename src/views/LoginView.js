@@ -18,6 +18,7 @@ class LoginView extends React.Component {
     };
 
     login_click() {
+        //可以用 const reindexToken = await AsyncStorage.getItem('REINDEX_TOKEN');存取
         console.log('ssssss1');
         console.log('ssssss'+this.accont);
         // alert("忘记密码");
