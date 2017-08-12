@@ -18,37 +18,40 @@ class LoginView extends React.Component {
         header: null,
     };
 
-    _getData(){
+    _getData() {
         fetch('http://gl.zhu-ku.com/zhuku/ws/system/auth/getNewVersion/1')
             .then((response) => response.json())
             .then((resopnseJson) => {
                 console.log(resopnseJson);
             })
             .catch((error) => {
-            console.error(error)
+                console.error(error)
             })
     }
-    _postData() {
-        let formData = new FormData();
-        formData.append('userAccount', this.state.account);
-        formData.append('userPassword', this.state.pwd);
-        formData.append('appKey', this.state.key);
 
+    _postData() {
         fetch('http://192.168.2.200:48080/zhuku/ws/system/auth/access', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'multipart/form-data',
-                // 'Content-Type': 'application/json;charset=utf-8',
+                'Content-Type': 'application/json;charset=utf-8',
+                // 'Content-Type': 'multipart/form-data',
+                // 'Content-Type': 'application/json',
             },
-            // credentials: 'include',
-            body: formData,
-            // mode: 'cors',
+            mode: 'cors',
+            credentials: 'include',
+            // body: this.formData,
+            body: JSON.stringify({
+                'userAccount': this.state.account,
+                'userPassword': this.state.pwd,
+                'appKey': this.state.key,
+            }),
         })
             .then((response) => response.json())
             .then((responseJson) => {
-                // console.log(responseJson);
+                console.log(responseJson);
                 // alert(responseJson);
+                this.props.navigation.navigate('Home');
                 return responseJson.statusDesc;
             })
             .catch((error) => {
@@ -59,15 +62,13 @@ class LoginView extends React.Component {
 
     login_click() {
         //可以用 const reindexToken = await AsyncStorage.getItem('REINDEX_TOKEN');存取
-        // let accountValue = new FormData.
 
         console.log('ssssss' + this.state.pwd);
         console.log('ssssss' + this.state.account);
         console.log('ssssss' + this.state.key);
 
-        // this._postData();
+        this._postData();
         // this._getData();
-        this.props.navigation.navigate('Home');
     }
 
     forgot_click() {
