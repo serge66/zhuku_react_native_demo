@@ -2,11 +2,16 @@ import React from "react";
 import {View, Image, AppRegistry, StyleSheet, Text} from "react-native";
 import * as Progress from "react-native-progress";
 
+/*
+ * 进度条例子
+ * https://github.com/oblador/react-native-progress
+ * */
+
 export default class WorkView extends React.Component {
-    static navigationOptions = {
-        title: '工作台',
-        header: null,
-    };
+    // static navigationOptions = {
+    //     title: '工作台',
+    //     header: null,
+    // };
 
     constructor(props) {
         super(props);

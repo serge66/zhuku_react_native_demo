@@ -13,7 +13,7 @@ class SplashView extends React.Component {
             () => {
                 this.props.navigation.navigate('selectEntry');
             },
-            1000
+            500
         );
     };
 
