@@ -10,6 +10,7 @@ class LoginView extends React.Component {
         this.state = {
             account: '',
             pwd: '',
+            key: 'ANDROID#12134',
         };
     }
 
@@ -17,34 +18,56 @@ class LoginView extends React.Component {
         header: null,
     };
 
-    login_click() {
-        //可以用 const reindexToken = await AsyncStorage.getItem('REINDEX_TOKEN');存取
-        console.log('ssssss1');
-        console.log('ssssss'+this.accont);
-        // alert("忘记密码");
+    _getData(){
+        fetch('http://gl.zhu-ku.com/zhuku/ws/system/auth/getNewVersion/1')
+            .then((response) => response.json())
+            .then((resopnseJson) => {
+                console.log(resopnseJson);
+            })
+            .catch((error) => {
+            console.error(error)
+            })
+    }
+    _postData() {
+        let formData = new FormData();
+        formData.append('userAccount', this.state.account);
+        formData.append('userPassword', this.state.pwd);
+        formData.append('appKey', this.state.key);
+
         fetch('http://192.168.2.200:48080/zhuku/ws/system/auth/access', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json',
+                'Content-Type': 'multipart/form-data',
+                // 'Content-Type': 'application/json;charset=utf-8',
             },
-            body: JSON.stringify({
-                userAccount: `${this.account}`,
-                userPassword: `${this.pwd}`,
-                appKey: 'ANDROID#12134',
-            })
+            // credentials: 'include',
+            body: formData,
+            // mode: 'cors',
         })
             .then((response) => response.json())
             .then((responseJson) => {
-                console.log(responseJson.movies);
-                alert(responseJson.movies);
-                return responseJson.movies;
+                // console.log(responseJson);
+                // alert(responseJson);
+                return responseJson.statusDesc;
             })
             .catch((error) => {
                 console.error(error);
-                alert(error);
+                // alert(error);
             });
-        // this.props.navigation.navigate('Home');
+    }
+
+    login_click() {
+        //可以用 const reindexToken = await AsyncStorage.getItem('REINDEX_TOKEN');存取
+        // let accountValue = new FormData.
+
+        console.log('ssssss' + this.state.pwd);
+        console.log('ssssss' + this.state.account);
+        console.log('ssssss' + this.state.key);
+
+        // this._postData();
+        // this._getData();
+        this.props.navigation.navigate('Home');
     }
 
     forgot_click() {
