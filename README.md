@@ -3,5 +3,3 @@
 #Using the step
 one:
     npm install
-two:
-    npm link

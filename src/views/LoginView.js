@@ -30,7 +30,7 @@ class LoginView extends React.Component {
     }
 
     _postData() {
-        fetch('http://192.168.2.200:48080/zhuku/ws/system/auth/access', {
+        fetch('http://api.test.zhu-ku.com/zhuku/ws/system/auth/access', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
