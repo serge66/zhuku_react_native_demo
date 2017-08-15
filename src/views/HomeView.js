@@ -6,6 +6,7 @@ import MyView from "./MyView.js";
 import ProjectView from "./ProjectsView.js";
 import ContactsView from "./ContactsView.js";
 import MessagesView from "./MessagesView";
+// import RNToast from "../test/ToastTest";
 
 const resizeMode = 'center';//resizeMode enum('cover', 'contain', 'stretch', 'repeat', 'center')
 
