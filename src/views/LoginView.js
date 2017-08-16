@@ -2,7 +2,7 @@ import React from "react";
 import {Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
 import {StackNavigator} from "react-navigation";
 import HomeView from "./HomeView.js";
-import ToastUtils from "../Utils/ToastUtils";
+import ToastUtils from "../utils/ToastUtils.js";
 import * as Progress from "react-native-progress";
 
 const {height, width} = Dimensions.get('window');
@@ -312,4 +312,4 @@ const loginStack = StackNavigator({
     Home: {screen: HomeView},
 });
 
-module.exports = loginStack;
+export default loginStack;

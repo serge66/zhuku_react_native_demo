@@ -1,6 +1,6 @@
 import React from "react";
 import {View, Image, AppRegistry, StyleSheet, BackHandler} from "react-native";
-import ToastUtils from "../Utils/ToastUtils.js";
+import ToastUtils from "../utils/ToastUtils.js";
 
 let lastBackPressed = 0;
 
@@ -27,7 +27,7 @@ export default class MessagesView extends React.Component {
             return false;
         }
         lastBackPressed = now;
-        ToastUtils.show('再点一次退出应用');
+        // ToastUtils.show('再点一次退出应用');
         return true;
     }*/
 

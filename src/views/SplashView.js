@@ -35,7 +35,6 @@ class SplashView extends React.Component {
         );
     };
 }
-;
 
 const styles = StyleSheet.create({
     flex: {
@@ -59,4 +58,4 @@ const splashStack = StackNavigator({
     selectEntry: {screen: SelectEntryView},
 });
 
-module.exports = splashStack;
+export default splashStack;

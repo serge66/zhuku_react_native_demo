@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 
 import Toast from "react-native-root-toast";
 
@@ -28,5 +28,4 @@ var ToastUtils = {
         });
     },
 };
-
-module.exports = ToastUtils;
+export default ToastUtils;

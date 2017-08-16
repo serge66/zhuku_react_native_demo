@@ -1,5 +1,5 @@
 import React from "react";
-import {View, Image, AppRegistry, StyleSheet} from "react-native";
+import {Image, StyleSheet} from "react-native";
 import {StackNavigator, TabNavigator} from "react-navigation";
 import WorkView from "./WorkView.js";
 import MyView from "./MyView.js";
@@ -116,4 +116,4 @@ const styles = StyleSheet.create({
     },
 });
 
-module.exports = homeStack;
+export default homeStack;
