@@ -3,7 +3,7 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {NavigationActions} from "react-navigation";
 
 const backAction = NavigationActions.back({
-    key: 'splash'
+    key: 'Splash'
 });
 
 export default class SelectEntryView extends React.Component {
@@ -14,13 +14,16 @@ export default class SelectEntryView extends React.Component {
         header: null,
     };
 
-    _loginClick() {
-        // this.props.navigation.goBack(null);
+    _paramsToLastPage() {
         const {navigate, goBack, state} = this.props.navigation;
-        state.params.callback("从selectEntty界面回传的数据");
+        // 在第二个页面,在goBack之前,将上个页面的方法取到,并回传参数,这样回传的参数会重走render方法
+        state.params.callback('从selectEntty界面回传的数据');
         goBack(null);
+    }
 
-        // this.props.navigation.goBack(null);
+    _loginClick() {
+        this._paramsToLastPage();
+
         this.props.navigation.navigate('Login', {
             // 跳转的时候携带一个参数去下个页面
             callback: (data) => {

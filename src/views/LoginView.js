@@ -102,7 +102,7 @@ export default class LoginView extends React.Component {
     _paramsToLastPage() {
         const {navigate, goBack, state} = this.props.navigation;
         // 在第二个页面,在goBack之前,将上个页面的方法取到,并回传参数,这样回传的参数会重走render方法
-        state.params.callback('从selectEntty界面回传的数据');
+        state.params.callback('从LoginView界面回传的数据');
         goBack(null);
     }
 

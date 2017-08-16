@@ -115,14 +115,21 @@ const Stack = StackNavigator({
     Login: {screen: LoginView},
     Home: {screen: homeTabNavigator},
 }, {
-    navigationOptions:{
+    navigationOptions: {
         gesturesEnabled: true,
     },
-    mode:'card',
-    initialRouteName:'Splash',
+    mode: 'card',
+    initialRouteName: 'Splash',
     // initialRouteParams:{
     //     initParams:this.props.navigation,
     // },
+    /*
+     headerMode - 页面跳转时，头部的动画模式
+     float - 渐变，类似iOS的原生效果
+     screen - 标题与屏幕一起淡入淡出
+     none - 没有动画
+     * */
+    headerMode: 'screen',
 });
 
 
