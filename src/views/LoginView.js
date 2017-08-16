@@ -47,7 +47,7 @@ class LoginView extends React.Component {
             ToastUtils.show('帐号或密码不能为空');
             return;
         }
-        this.setState({isShowProgress:true});
+        this.setState({isShowProgress: true});
         fetch('http://api.test.zhu-ku.com/zhuku/ws/system/auth/access', {
             method: 'POST',
             headers: {
@@ -67,12 +67,23 @@ class LoginView extends React.Component {
         })
             .then((response) => response.json())
             .then((responseJson) => {
-                this.setState({isShowProgress:false});
+                this.setState({isShowProgress: false});
                 console.log(responseJson);
                 console.log(responseJson.statusCode);
                 // alert(responseJson);
                 if (responseJson.statusCode === '0000') {
+                    this._paramsToLastPage();
                     this.props.navigation.navigate('Home');
+
+                    // let navigateAction = NavigationActions.reset({
+                    //     index: 0,
+                    //     actions: [
+                    //         NavigationActions.navigate({routeName: 'Home'})  //or routeName:'Main'
+                    //     ]
+                    // });
+                    // this.props.navigation.dispatch(navigateAction);
+
+
                 } else if (responseJson.statusCode === '1011') {
                     ToastUtils.show("帐号或密码不正确");
                 } else {
@@ -82,7 +93,7 @@ class LoginView extends React.Component {
             })
             .catch((error) => {
                 console.error(error);
-                this.setState({isShowProgress:false});
+                this.setState({isShowProgress: false});
                 // alert(error);
             });
     }
@@ -94,8 +105,20 @@ class LoginView extends React.Component {
         console.log('ssssss' + this.state.account);
         console.log('ssssss' + this.state.key);
 
+        // this.props.navigation.goBack();
+
         this._postData();
         // this._getData();
+
+        // this._paramsToLastPage();
+
+    }
+
+    _paramsToLastPage() {
+        const {navigate, goBack, state} = this.props.navigation;
+        // 在第二个页面,在goBack之前,将上个页面的方法取到,并回传参数,这样回传的参数会重走render方法
+        state.params.callback('回调参数');
+        goBack(null);
     }
 
     forgot_click() {
@@ -176,19 +199,19 @@ class LoginView extends React.Component {
 
                 </View>
                 {
-                    this.state.isShowProgress === true ? (
-                        <View style={[styles.progressContent, styles.flex]}>
-                            <Progress.CircleSnail
-                                style={[styles.progress]}
-                                color={[
-                                    '#2196F3',
-                                ]}
-                                size={60}
-                            />
-                        </View>
-                    ) : (
-                        null
-                    )
+                    this.state.isShowProgress === true ?
+                        (
+                            <View style={[styles.progressContent, styles.flex]}>
+                                <Progress.CircleSnail
+                                    style={[styles.progress]}
+                                    color={[
+                                        '#2196F3',
+                                    ]}
+                                    size={60}
+                                />
+                            </View>
+                        ) :
+                        (null)
                 }
 
             </View>

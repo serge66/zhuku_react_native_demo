@@ -11,6 +11,7 @@ class SplashView extends React.Component {
     componentDidMount() {
         this.timer = setTimeout(
             () => {
+                this.props.navigation.goBack(null);
                 this.props.navigation.navigate('selectEntry');
             },
             1000
@@ -24,7 +25,8 @@ class SplashView extends React.Component {
     render() {
         return (
             <View style={[styles.flex, styles.top]}>
-                <Image style={styles.bottom} source={require('../assets/img/splash_logo.png')}></Image>
+                <Image style={styles.bottom}
+                       source={require('../assets/img/splash_logo.png')}></Image>
             </View>
         );
     };

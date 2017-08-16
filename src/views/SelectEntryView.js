@@ -13,9 +13,14 @@ class SelectEntryView extends React.Component {
     };
 
     _loginClick() {
-        // this.props.navigation.goBack(null);
-        this.props.navigation.navigate('Login');
-        this.props.navigation.dispatch(backAction);
+        this.props.navigation.goBack(null);
+        this.props.navigation.navigate('Login', {
+            // 跳转的时候携带一个参数去下个页面
+            callback: (data) => {
+                console.log(data); // 打印值为：'回调参数'
+            }
+        });
+        // this.props.navigation.dispatch(backAction);
     }
 
     render() {
