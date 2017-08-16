@@ -1,16 +1,19 @@
 import React from "react";
-import {Image, StyleSheet} from "react-native";
+
+import SplashView from "../views/SplashView";
+import SelectEntryView from "../views/SelectEntryView";
+import LoginView from "../views/LoginView";
+import WorkView from "../views/WorkView.js";
+import MyView from "../views/MyView.js";
+import ProjectView from "../views/ProjectsView.js";
+import ContactsView from "../views/ContactsView.js";
+import MessagesView from "../views/MessagesView";
+import {Image} from "react-native";
 import {StackNavigator, TabNavigator} from "react-navigation";
-import WorkView from "./WorkView.js";
-import MyView from "./MyView.js";
-import ProjectView from "./ProjectsView.js";
-import ContactsView from "./ContactsView.js";
-import MessagesView from "./MessagesView";
-// import RNToast from "../test/ToastTest";
 
 const resizeMode = 'center';//resizeMode enum('cover', 'contain', 'stretch', 'repeat', 'center')
 
-const navigator = TabNavigator({
+const homeTabNavigator = TabNavigator({
     Message: {
         screen: MessagesView,
         navigationOptions: {
@@ -105,15 +108,14 @@ const navigator = TabNavigator({
     },
 });
 
-const homeStack = StackNavigator({
-    Home: {screen: navigator},
+
+const Stack = StackNavigator({
+    Splash: {screen: SplashView},
+    SelectEntry: {screen: SelectEntryView},
+    Login: {screen: LoginView},
+    Home: {screen: homeTabNavigator},
+
 });
 
-const styles = StyleSheet.create({
-    tabImage: {
-        width: 24,
-        height: 24,
-    },
-});
 
-export default homeStack;
+export default Stack;

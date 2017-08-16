@@ -1,12 +1,10 @@
 import React from "react";
 import {Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
-import {StackNavigator} from "react-navigation";
-import HomeView from "./HomeView.js";
 import ToastUtils from "../utils/ToastUtils.js";
 import * as Progress from "react-native-progress";
 
 const {height, width} = Dimensions.get('window');
-class LoginView extends React.Component {
+export default class LoginView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -307,9 +305,4 @@ const styles = StyleSheet.create({
     },
 });
 
-const loginStack = StackNavigator({
-    Login: {screen: LoginView},
-    Home: {screen: HomeView},
-});
 
-export default loginStack;

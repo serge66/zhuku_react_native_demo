@@ -1,5 +1,5 @@
 import React from "react";
-import {View, Image, AppRegistry, StyleSheet} from "react-native";
+import {Image, StyleSheet, View} from "react-native";
 
 export default class MyView extends React.Component {
     static navigationOptions = {
