@@ -2,17 +2,29 @@ import React from "react";
 import {Image, StyleSheet, View} from "react-native";
 
 export default class SplashView extends React.Component {
+    constructor(props) {
+        super(props);
+    }
     static navigationOptions = {
         header: null,
     };
 
+    _paramsToLastPage() {
+        // const {navigate, goBack, state} = this.props.navigation;
+        // 在第二个页面,在goBack之前,将上个页面的方法取到,并回传参数,这样回传的参数会重走render方法
+        // state.params.callback('回调参数');
+        // goBack(null);
+        // this.props.navigation.state.params.initParams.goBack(null);
+    }
+
     componentDidMount() {
         this.timer = setTimeout(
             () => {
+                this._paramsToLastPage();
+
                 this.props.navigation.navigate('SelectEntry', {
                     callback: (data) => {
                         console.log('splashView callback: ' + data)
-                        this.props.navigation.goBack();
                     }
                 });
             },

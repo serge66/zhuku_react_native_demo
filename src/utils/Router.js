@@ -114,7 +114,15 @@ const Stack = StackNavigator({
     SelectEntry: {screen: SelectEntryView},
     Login: {screen: LoginView},
     Home: {screen: homeTabNavigator},
-
+}, {
+    navigationOptions:{
+        gesturesEnabled: true,
+    },
+    mode:'card',
+    initialRouteName:'Splash',
+    // initialRouteParams:{
+    //     initParams:this.props.navigation,
+    // },
 });
 
 

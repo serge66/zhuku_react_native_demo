@@ -7,6 +7,9 @@ const backAction = NavigationActions.back({
 });
 
 export default class SelectEntryView extends React.Component {
+    constructor(props) {
+        super(props);
+    }
     static navigationOptions = {
         header: null,
     };
@@ -15,9 +18,9 @@ export default class SelectEntryView extends React.Component {
         // this.props.navigation.goBack(null);
         const {navigate, goBack, state} = this.props.navigation;
         state.params.callback("从selectEntty界面回传的数据");
-        // goBack();
+        goBack(null);
 
-        this.props.navigation.goBack(null);
+        // this.props.navigation.goBack(null);
         this.props.navigation.navigate('Login', {
             // 跳转的时候携带一个参数去下个页面
             callback: (data) => {
