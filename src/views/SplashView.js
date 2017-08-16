@@ -11,7 +11,12 @@ class SplashView extends React.Component {
     componentDidMount() {
         this.timer = setTimeout(
             () => {
-                this.props.navigation.navigate('selectEntry');
+                this.props.navigation.navigate('selectEntry',{
+                    callback:(data)=>{
+                        console.log('splashView callback: '+data)
+                        this.props.navigation.goBack();
+                    }
+                });
             },
             1000
         );

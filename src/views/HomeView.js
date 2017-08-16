@@ -83,6 +83,8 @@ const navigator = TabNavigator({
         inactiveTintColor: '#000', // 文字和图片未选中颜色
         showIcon: true, // android 默认不显示 icon, 需要设置为 true 才会显示
         showLabel: true,
+        pressColor: '#6c6dff',
+        pressOpcity: '0.5',
         // iconStyle: {//设置后图片显示不完整
         //     width: 20,
         //     height: 25,

@@ -14,8 +14,11 @@ class SelectEntryView extends React.Component {
 
     _loginClick() {
         // this.props.navigation.goBack(null);
+        const {navigate,goBack,state} =this.props.navigation;
+        state.params.callback("从selectEntty界面回传的数据");
+        goBack();
         this.props.navigation.navigate('Login');
-        this.props.navigation.dispatch(backAction);
+        // this.props.navigation.dispatch(backAction);
     }
 
     render() {

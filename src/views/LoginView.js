@@ -67,8 +67,10 @@ class LoginView extends React.Component {
         console.log('ssssss' + this.state.account);
         console.log('ssssss' + this.state.key);
 
-        this._postData();
+        // this._postData();
         // this._getData();
+        this.props.navigation.navigate('Home');
+        // this.props.navigation.goBack('SelectEntry');
     }
 
     forgot_click() {
