@@ -16,8 +16,15 @@ class SelectEntryView extends React.Component {
         // this.props.navigation.goBack(null);
         const {navigate,goBack,state} =this.props.navigation;
         state.params.callback("从selectEntty界面回传的数据");
-        goBack();
-        this.props.navigation.navigate('Login');
+        // goBack();
+
+        this.props.navigation.goBack(null);
+        this.props.navigation.navigate('Login', {
+            // 跳转的时候携带一个参数去下个页面
+            callback: (data) => {
+                console.log('SelectEntryView callback: ' + data); // 打印值为：'回调参数'
+            }
+        });
         // this.props.navigation.dispatch(backAction);
     }
 

@@ -4,7 +4,7 @@ import {View, Image, AppRegistry, StyleSheet} from "react-native";
 export default class MyView extends React.Component {
     static navigationOptions = {
         title: '我的',
-        header: null,
+        // header: null,
     };
 
     render() {

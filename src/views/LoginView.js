@@ -1,9 +1,11 @@
 import React from "react";
-import {View, Image, AppRegistry, StyleSheet, Text, TextInput, Dimensions, TouchableOpacity} from "react-native";
+import {Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
 import {StackNavigator} from "react-navigation";
 import HomeView from "./HomeView.js";
+import ToastUtils from "../Utils/ToastUtils";
+import * as Progress from "react-native-progress";
 
-const {height, width}=Dimensions.get('window');
+const {height, width} = Dimensions.get('window');
 class LoginView extends React.Component {
     constructor(props) {
         super(props);
@@ -11,6 +13,7 @@ class LoginView extends React.Component {
             account: '',
             pwd: '',
             key: 'ANDROID#12134',
+            isShowProgress: false,
         };
     }
 
@@ -30,6 +33,11 @@ class LoginView extends React.Component {
     }
 
     _postData() {
+        if (this.state.account == '' || this.state.pwd == '') {
+            ToastUtils.show('帐号或密码不能为空');
+            return;
+        }
+        this.setState({isShowProgress: true});
         fetch('http://api.test.zhu-ku.com/zhuku/ws/system/auth/access', {
             method: 'POST',
             headers: {
@@ -49,13 +57,33 @@ class LoginView extends React.Component {
         })
             .then((response) => response.json())
             .then((responseJson) => {
+                this.setState({isShowProgress: false});
                 console.log(responseJson);
+                console.log(responseJson.statusCode);
                 // alert(responseJson);
-                this.props.navigation.navigate('Home');
-                return responseJson.statusDesc;
+                if (responseJson.statusCode === '0000') {
+                    this._paramsToLastPage();
+                    this.props.navigation.navigate('Home');
+
+                    // let navigateAction = NavigationActions.reset({
+                    //     index: 0,
+                    //     actions: [
+                    //         NavigationActions.navigate({routeName: 'Home'})  //or routeName:'Main'
+                    //     ]
+                    // });
+                    // this.props.navigation.dispatch(navigateAction);
+
+
+                } else if (responseJson.statusCode === '1011') {
+                    ToastUtils.show("帐号或密码不正确");
+                } else {
+                    ToastUtils.show("网络连接失败，请重连后重试");
+                }
+                // return responseJson.statusDesc;
             })
             .catch((error) => {
                 console.error(error);
+                this.setState({isShowProgress: false});
                 // alert(error);
             });
     }
@@ -66,98 +94,125 @@ class LoginView extends React.Component {
         console.log('ssssss' + this.state.pwd);
         console.log('ssssss' + this.state.account);
         console.log('ssssss' + this.state.key);
+        // this.props.navigation.goBack();
 
-        // this._postData();
+        this._postData();
         // this._getData();
-        this.props.navigation.navigate('Home');
-        // this.props.navigation.goBack('SelectEntry');
+        // this._paramsToLastPage();
+    }
+
+    _paramsToLastPage() {
+        const {navigate, goBack, state} = this.props.navigation;
+        // 在第二个页面,在goBack之前,将上个页面的方法取到,并回传参数,这样回传的参数会重走render方法
+        state.params.callback('回调参数');
+        goBack(null);
     }
 
     forgot_click() {
-        // alert("忘记密码")
-
+        alert("忘记密码")
     }
 
     render() {
         return (
-            <View style={[styles.flex, styles.top]}>
-                <View style={styles.homePage}>
-                    <Text style={styles.homePageText}>首页</Text>
-                </View>
-                <View>
-                    <Image style={{width: 80, height: 100}}
-                           resizeMode={'center'}
-                           source={require('../assets/img/logo_alone.png')}/>
-                </View>
-                <View style={styles.content}>{/*中间的两个输入模块*/}
-                    <View style={styles.account_pwd_line}>
-                        <View style={styles.account_pwd}>
-                            <Text style={styles.leftText}>帐号</Text>
-                            {/*<Text style={styles.rightText}>请输入手机号</Text>*/}
-                            <TextInput
-                                placeholder={'请输入手机号'}
-                                multiline={false}
-                                autoFocus={true}
-                                style={styles.rightText}
-                                blurOnSubmit={true}
-                                underlineColorAndroid={'transparent'}
-                                keyboardType={'numeric'}
-                                onChangeText={(text) => {
-                                    this.setState({
-                                        account: text,
-                                    });
-                                }}
-                            />
-                        </View>
-                        <View style={styles.line}>{/*一条线*/}
-                        </View>
+            <View style={[styles.flex, styles.posi]}>
+                <View style={[styles.flex, styles.top, styles.topContent]}>
+                    <View style={styles.homePage}>
+                        <Text style={styles.homePageText}>首页</Text>
                     </View>
-                    <View style={styles.account_pwd_line}>
-                        <View style={styles.account_pwd}>
-                            <Text style={styles.leftText}>密码</Text>
-                            {/* <Text style={styles.rightText}>请输入登录密码</Text>*/}
-                            <TextInput
-                                placeholder={'请输入登录密码'}
-                                multiline={false}
-                                autoFocus={false}
-                                style={styles.rightText}
-                                blurOnSubmit={true}
-                                secureTextEntry={true}
-                                underlineColorAndroid={'transparent'}
-                                keyboardType={'ascii-capable'}
-                                onChangeText={(text) => {
-                                    this.setState({
-                                        pwd: text,
-                                    });
-                                }}
-                            />
-                        </View>
-                        <View style={styles.line}>{/*一条线*/}
-                        </View>
-                    </View>
-                </View>
-                <TouchableOpacity activeOpacity={1}
-                                  onPress={() => this.login_click()}>
-                    <View style={styles.loginLayout}>
-                        <Text style={styles.loginText}>登录</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity activeOpacity={1}
-                                  onPress={() => this.forgot_click()}>
                     <View>
-                        <Text style={styles.forgotText}>忘记密码?</Text>
+                        <Image style={{width: 80, height: 100}}
+                               resizeMode={'center'}
+                               source={require('../assets/img/logo_alone.png')}/>
                     </View>
-                </TouchableOpacity>
+                    <View style={styles.content}>{/*中间的两个输入模块*/}
+                        <View style={styles.account_pwd_line}>
+                            <View style={styles.account_pwd}>
+                                <Text style={styles.leftText}>帐号</Text>
+                                {/*<Text style={styles.rightText}>请输入手机号</Text>*/}
+                                <TextInput
+                                    placeholder={'请输入手机号'}
+                                    multiline={false}
+                                    autoFocus={true}
+                                    style={styles.rightText}
+                                    blurOnSubmit={true}
+                                    underlineColorAndroid={'transparent'}
+                                    keyboardType={'numeric'}
+                                    onChangeText={(text) => {
+                                        this.setState({
+                                            account: text,
+                                        });
+                                    }}
+                                />
+                            </View>
+                            <View style={styles.line}>{/*一条线*/}
+                            </View>
+                        </View>
+                        <View style={styles.account_pwd_line}>
+                            <View style={styles.account_pwd}>
+                                <Text style={styles.leftText}>密码</Text>
+                                {/* <Text style={styles.rightText}>请输入登录密码</Text>*/}
+                                <TextInput
+                                    placeholder={'请输入登录密码'}
+                                    multiline={false}
+                                    autoFocus={false}
+                                    style={styles.rightText}
+                                    blurOnSubmit={true}
+                                    secureTextEntry={true}
+                                    underlineColorAndroid={'transparent'}
+                                    keyboardType={'ascii-capable'}
+                                    onChangeText={(text) => {
+                                        this.setState({
+                                            pwd: text,
+                                        });
+                                    }}
+                                />
+                            </View>
+                            <View style={styles.line}>{/*一条线*/}
+                            </View>
+                        </View>
+                    </View>
+                    <TouchableOpacity activeOpacity={1}
+                                      onPress={() => this.login_click()}>
+                        <View style={styles.loginLayout}>
+                            <Text style={styles.loginText}>登录</Text>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity activeOpacity={1}
+                                      onPress={() => this.forgot_click()}>
+                        <View>
+                            <Text style={styles.forgotText}>忘记密码?</Text>
+                        </View>
+                    </TouchableOpacity>
+
+                </View>
+                {
+                    this.state.isShowProgress === true ?
+                        (
+                            <View style={[styles.progressContent, styles.flex]}>
+                                <Progress.CircleSnail
+                                    style={[styles.progress]}
+                                    color={[
+                                        '#2196F3',
+                                    ]}
+                                    size={60}
+                                />
+                            </View>
+                        ) :
+                        (null)
+                }
+
             </View>
         );
     }
-    ;
+
 }
-;
 
 const styles = StyleSheet.create({
     flex: {
         flex: 1,
+    },
+    posi: {
+        position: 'absolute',
     },
     top: {
         flexDirection: 'column',
@@ -232,6 +287,23 @@ const styles = StyleSheet.create({
         fontSize: 12,
         color: '#aaaaaa',
         marginTop: 20,
+    },
+    progress: {
+        margin: 10,
+        alignSelf: 'center',
+    },
+    progressContent: {
+        position: 'absolute',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#55555555',
+        width: width,
+        height: height,
+    },
+    topContent: {
+        position: 'absolute',
+        height: height,
     },
 });
 

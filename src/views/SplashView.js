@@ -1,5 +1,5 @@
 import React from "react";
-import {View, Image, AppRegistry, StyleSheet} from "react-native";
+import {Image, StyleSheet, View} from "react-native";
 import {StackNavigator} from "react-navigation";
 import SelectEntryView from "./SelectEntryView.js";
 
@@ -11,9 +11,9 @@ class SplashView extends React.Component {
     componentDidMount() {
         this.timer = setTimeout(
             () => {
-                this.props.navigation.navigate('selectEntry',{
-                    callback:(data)=>{
-                        console.log('splashView callback: '+data)
+                this.props.navigation.navigate('selectEntry', {
+                    callback: (data) => {
+                        console.log('splashView callback: ' + data)
                         this.props.navigation.goBack();
                     }
                 });
@@ -29,7 +29,8 @@ class SplashView extends React.Component {
     render() {
         return (
             <View style={[styles.flex, styles.top]}>
-                <Image style={styles.bottom} source={require('../assets/img/splash_logo.png')}></Image>
+                <Image style={styles.bottom}
+                       source={require('../assets/img/splash_logo.png')}></Image>
             </View>
         );
     };
