@@ -3,8 +3,22 @@ import {View, Image, AppRegistry, StyleSheet, Text} from "react-native";
 
 export default class WorkView extends React.Component {
     static navigationOptions = {
-        title: '工作台',
-        header: null,
+        headerTitle: <Text
+            style={{
+                fontSize:16,
+                alignSelf: 'center',
+                textAlignVertical: 'center'
+            }}
+            onPress={() => {
+                alert('点击了title')
+            }}> 工作台</Text>,
+        headerStyle: {
+            backgroundColor: "white"
+        },
+        headerTitleStyle: {
+            alignSelf: 'center'
+        },
+        headerLeft:null,
     };
 
     render() {

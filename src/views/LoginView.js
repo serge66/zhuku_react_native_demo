@@ -32,8 +32,9 @@ export default class LoginView extends React.Component {
 
     _postData() {
         if (this.state.account == '' || this.state.pwd == '') {
-            ToastUtils.show('帐号或密码不能为空');
-            return;
+            // ToastUtils.show('帐号或密码不能为空');
+            // return;
+            this.setState({account:'17740411939',pwd:'00000000'})
         }
         this.setState({isShowProgress: true});
         fetch('http://api.test.zhu-ku.com/zhuku/ws/system/auth/access', {

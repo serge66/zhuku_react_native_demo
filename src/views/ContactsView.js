@@ -1,10 +1,24 @@
 import React from "react";
-import {View, Image, AppRegistry, StyleSheet} from "react-native";
+import {View, Image, AppRegistry, StyleSheet, Text} from "react-native";
 
 export default class ContactsView extends React.Component {
-    static navigationOptions = {
-        title: '联系人',
-        header: null,
+        static navigationOptions = {
+            headerTitle: <Text
+                style={{
+                    fontSize:16,
+                    alignSelf: 'center',
+                    textAlignVertical: 'center'
+                }}
+                onPress={() => {
+                    alert('点击了title')
+                }}> 联系人</Text>,
+            headerStyle: {
+                backgroundColor: "white"
+            },
+            headerTitleStyle: {
+                alignSelf: 'center'
+            },
+            headerLeft:null,
     };
 
     render() {

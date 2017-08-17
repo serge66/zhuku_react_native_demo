@@ -1,35 +1,48 @@
 import React from "react";
-import {View, Image, AppRegistry, StyleSheet, BackHandler} from "react-native";
-import ToastUtils from "../utils/ToastUtils.js";
+import {View, Image, AppRegistry, StyleSheet, BackHandler,Text} from "react-native";
 
 let lastBackPressed = 0;
 
 export default class MessagesView extends React.Component {
     static navigationOptions = {
-        title: '消息',
-        header: null,
+        headerTitle: <Text
+            style={{
+                fontSize:16,
+                alignSelf: 'center',
+                textAlignVertical: 'center'
+            }}
+            onPress={() => {
+                alert('点击了title')
+            }}> 消息</Text>,
+        headerStyle: {
+            backgroundColor: "white"
+        },
+        headerTitleStyle: {
+            alignSelf: 'center'
+        },
+        headerLeft:null,
     };
 
-   /* componentWillMount() {
-        console.log('消息界面挂载');
-        BackHandler.addEventListener('hardwareBackPress', this._onBackAndroid);
-    }
+    /* componentWillMount() {
+     console.log('消息界面挂载');
+     BackHandler.addEventListener('hardwareBackPress', this._onBackAndroid);
+     }
 
-    componentUnWillMount() {
-        console.log('消息界面卸载');
+     componentUnWillMount() {
+     console.log('消息界面卸载');
 
-        BackHandler.addEventListener('hardwareBackPress', this._onBackAndroid);
-    }
+     BackHandler.addEventListener('hardwareBackPress', this._onBackAndroid);
+     }
 
-    _onBackAndroid = () => {
-        let now = new Date().getTime();
-        if (now - lastBackPressed < 2500) {
-            return false;
-        }
-        lastBackPressed = now;
-        // ToastUtils.show('再点一次退出应用');
-        return true;
-    }*/
+     _onBackAndroid = () => {
+     let now = new Date().getTime();
+     if (now - lastBackPressed < 2500) {
+     return false;
+     }
+     lastBackPressed = now;
+     // ToastUtils.show('再点一次退出应用');
+     return true;
+     }*/
 
     render() {
 

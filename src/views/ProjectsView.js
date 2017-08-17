@@ -1,10 +1,24 @@
 import React from "react";
-import {View, Image, AppRegistry, StyleSheet} from "react-native";
+import {View, Image, AppRegistry, StyleSheet, Text} from "react-native";
 
 export default class ProjectsView extends React.Component {
     static navigationOptions = {
-        title: '项目',
-        header: null,
+        headerTitle: <Text
+            style={{
+                fontSize:16,
+                alignSelf: 'center',
+                textAlignVertical: 'center'
+            }}
+            onPress={() => {
+                alert('点击了title')
+            }}> 项目</Text>,
+        headerStyle: {
+            backgroundColor: "white"
+        },
+        headerTitleStyle: {
+            alignSelf: 'center'
+        },
+        headerLeft:null,
     };
 
     render() {

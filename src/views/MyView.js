@@ -1,10 +1,24 @@
 import React from "react";
-import {Image, StyleSheet, View} from "react-native";
+import {Image, StyleSheet, View, Text} from "react-native";
 
 export default class MyView extends React.Component {
     static navigationOptions = {
-        title: '我的',
-        // header: null,
+        headerTitle: <Text
+            style={{
+                fontSize:16,
+                alignSelf: 'center',
+                textAlignVertical: 'center'
+            }}
+            onPress={() => {
+                alert('点击了title')
+            }}> 我的</Text>,
+        headerStyle: {
+            backgroundColor: "white"
+        },
+        headerTitleStyle: {
+            alignSelf: 'center'
+        },
+        headerLeft:null,
     };
 
     render() {
