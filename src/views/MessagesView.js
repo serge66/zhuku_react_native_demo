@@ -9,7 +9,8 @@ export default class MessagesView extends React.Component {
             style={{
                 fontSize:16,
                 alignSelf: 'center',
-                textAlignVertical: 'center'
+                textAlignVertical: 'center',
+                color:'#000',
             }}
             onPress={() => {
                 alert('点击了title')

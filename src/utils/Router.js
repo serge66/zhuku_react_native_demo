@@ -10,6 +10,7 @@ import ContactsView from "../views/ContactsView.js";
 import MessagesView from "../views/MessagesView";
 import {Image} from "react-native";
 import {StackNavigator, TabNavigator} from "react-navigation";
+import CardStackStyleInterpolator from "react-navigation/src/views/CardStackStyleInterpolator";
 
 const resizeMode = 'center';//resizeMode enum('cover', 'contain', 'stretch', 'repeat', 'center')
 
@@ -103,7 +104,7 @@ const homeTabNavigator = TabNavigator({
         },
         labelStyle: {
             fontSize: 12, // 文字大小
-            color: '#000',
+            // color: '#000',如果指出设置颜色，会覆盖activeTintColor、inactiveTintColor设置
         },
     },
 });
@@ -118,7 +119,6 @@ const Stack = StackNavigator({
     navigationOptions: {
         gesturesEnabled: true,
     },
-    mode: 'card',
     initialRouteName: 'Splash',
     // initialRouteParams:{
     //     initParams:this.props.navigation,
@@ -130,6 +130,23 @@ const Stack = StackNavigator({
      none - 没有动画
      * */
     headerMode: 'screen',
+    mode: 'card',
+    transitionConfig: () => ({
+        // 修改页面的跳转动画,只要修改最后的forVertical就可以实现不同的动画了。
+        /*
+         * 1、从右向左：  forHorizontal；
+         2、从下向上：  forVertical；
+         3、安卓那种的从下向上： forFadeFromBottomAndroid；
+         4、无动画：  forInitial。
+
+
+
+
+
+         * */
+        screenInterpolator: CardStackStyleInterpolator.forHorizontal,
+    }),
+
 });
 
 
