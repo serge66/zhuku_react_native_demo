@@ -2,6 +2,7 @@ import React from "react";
 import {Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
 import ToastUtils from "../utils/ToastUtils.js";
 import * as Progress from "react-native-progress";
+import GV from "../utils/GlobalVariable";
 
 const {height, width} = Dimensions.get('window');
 export default class LoginView extends React.Component {
@@ -34,7 +35,7 @@ export default class LoginView extends React.Component {
         if (this.state.account == '' || this.state.pwd == '') {
             // ToastUtils.show('帐号或密码不能为空');
             // return;
-            this.setState({account:'17740411939',pwd:'00000000'})
+            this.setState({account: '17740411939', pwd: '00000000'})
         }
         this.setState({isShowProgress: true});
         fetch('http://api.test.zhu-ku.com/zhuku/ws/system/auth/access', {
@@ -61,6 +62,16 @@ export default class LoginView extends React.Component {
                 console.log(responseJson.statusCode);
                 // alert(responseJson);
                 if (responseJson.statusCode === '0000') {
+
+                    GV.ACCESS_TOKEN = responseJson.tokenCode;
+                    if (responseJson.returnData != null) {
+                        GV.userAccount = responseJson.returnData.userAccount;
+                        GV.USER_ID = responseJson.returnData.userId;
+                        GV.USER_NAME = responseJson.returnData.userName;
+
+                    }
+                    console.log("帐号：" + GV.userAccount + " id：" + GV.USER_ID + " 用户名：" + GV.USER_NAME);
+
                     this._paramsToLastPage();
                     this.props.navigation.navigate('Home');
 
@@ -111,12 +122,23 @@ export default class LoginView extends React.Component {
         alert("忘记密码")
     }
 
+    select_entry_click() {
+        // this.props.navigation.navigate('SelectEntry');
+        const {navigate, goBack, state} = this.props.navigation;
+        // 在第二个页面,在goBack之前,将上个页面的方法取到,并回传参数,这样回传的参数会重走render方法
+        // state.params.callback('从LoginView界面回传的数据');
+        goBack(null);
+    }
+
     render() {
         return (
             <View style={[styles.flex, styles.posi]}>
                 <View style={[styles.flex, styles.top, styles.topContent]}>
                     <View style={styles.homePage}>
-                        <Text style={styles.homePageText}>首页</Text>
+                        <TouchableOpacity activeOpacity={1}
+                                          onPress={() => this.select_entry_click()}>
+                            <Text style={styles.homePageText}>首页</Text>
+                        </TouchableOpacity>
                     </View>
                     <View>
                         <Image style={{width: 80, height: 100}}

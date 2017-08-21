@@ -23,12 +23,12 @@ export default class SelectEntryView extends React.Component {
     }
 
     _loginClick() {
-        this._paramsToLastPage();
 
         this.props.navigation.navigate('Login', {
             // 跳转的时候携带一个参数去下个页面
             callback: (data) => {
                 console.log('SelectEntryView callback: ' + data); // 打印值为：'回调参数'
+                this._paramsToLastPage();
             }
         });
         // this.props.navigation.dispatch(backAction);

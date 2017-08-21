@@ -18,11 +18,12 @@ export default class SplashView extends React.Component {
     componentDidMount() {
         this.timer = setTimeout(
             () => {
-                this._paramsToLastPage();
 
                 this.props.navigation.navigate('SelectEntry', {
                     callback: (data) => {
-                        console.log('splashView callback: ' + data)
+                        console.log('splashView callback: ' + data);
+                        this._paramsToLastPage();
+
                     }
                 });
             },

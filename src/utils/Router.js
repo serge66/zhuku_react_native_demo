@@ -151,3 +151,4 @@ const Stack = StackNavigator({
 
 
 export default Stack;
+// export default homeTabNavigator;

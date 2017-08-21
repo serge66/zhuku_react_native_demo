@@ -1,6 +1,5 @@
 import React from "react";
 import {View, Image, AppRegistry, StyleSheet, BackHandler,Text} from "react-native";
-
 let lastBackPressed = 0;
 
 export default class MessagesView extends React.Component {
