@@ -68,7 +68,9 @@ export default class LoginView extends React.Component {
                         GV.userAccount = responseJson.returnData.userAccount;
                         GV.USER_ID = responseJson.returnData.userId;
                         GV.USER_NAME = responseJson.returnData.userName;
-
+                        GV.USER_PORTRAIT = responseJson.returnData.userHeadImg;
+                        // GV.USER_JOB = responseJson.returnData.userHeadImg;
+                        GV.COMPANYNAME = responseJson.returnData.companyName;
                     }
                     console.log("帐号：" + GV.userAccount + " id：" + GV.USER_ID + " 用户名：" + GV.USER_NAME);
 

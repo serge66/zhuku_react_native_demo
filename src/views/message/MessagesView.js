@@ -1,7 +1,8 @@
 import React from "react";
-import {View, Image, AppRegistry, StyleSheet, Text} from "react-native";
+import {View, Image, AppRegistry, StyleSheet, BackHandler,Text} from "react-native";
+let lastBackPressed = 0;
 
-export default class ProjectsView extends React.Component {
+export default class MessagesView extends React.Component {
     static navigationOptions = {
         headerTitle: <Text
             style={{
@@ -12,7 +13,7 @@ export default class ProjectsView extends React.Component {
             }}
             onPress={() => {
                 alert('点击了title')
-            }}> 项目</Text>,
+            }}> 消息</Text>,
         headerStyle: {
             backgroundColor: "white"
         },
@@ -22,15 +23,37 @@ export default class ProjectsView extends React.Component {
         headerLeft:null,
     };
 
+    /* componentWillMount() {
+     console.log('消息界面挂载');
+     BackHandler.addEventListener('hardwareBackPress', this._onBackAndroid);
+     }
+
+     componentUnWillMount() {
+     console.log('消息界面卸载');
+
+     BackHandler.addEventListener('hardwareBackPress', this._onBackAndroid);
+     }
+
+     _onBackAndroid = () => {
+     let now = new Date().getTime();
+     if (now - lastBackPressed < 2500) {
+     return false;
+     }
+     lastBackPressed = now;
+     // ToastUtils.show('再点一次退出应用');
+     return true;
+     }*/
+
     render() {
+
         return (
             <View style={[styles.flex, styles.top]}>
-                <Image style={styles.bottom} source={require('../assets/img/splash_logo.png')}></Image>
+                <Image style={styles.bottom}
+                       source={require('../../assets/img/splash_logo.png')}></Image>
             </View>
         );
     };
 }
-;
 
 const styles = StyleSheet.create({
     flex: {
@@ -48,4 +71,3 @@ const styles = StyleSheet.create({
         marginBottom: 40,
     },
 });
-

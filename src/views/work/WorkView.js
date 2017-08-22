@@ -25,7 +25,7 @@ export default class WorkView extends React.Component {
     render() {
         return (
             <View style={[styles.flex, styles.top]}>
-                <Image style={styles.bottom} source={require('../assets/img/splash_logo.png')}></Image>
+                <Image style={styles.bottom} source={require('../../assets/img/splash_logo.png')}></Image>
             </View>
         );
     };

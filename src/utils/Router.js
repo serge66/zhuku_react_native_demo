@@ -1,13 +1,19 @@
 import React from "react";
-
 import SplashView from "../views/SplashView";
 import SelectEntryView from "../views/SelectEntryView";
 import LoginView from "../views/LoginView";
-import WorkView from "../views/WorkView.js";
-import MyView from "../views/MyView.js";
-import ProjectView from "../views/ProjectsView.js";
-import ContactsView from "../views/ContactsView.js";
-import MessagesView from "../views/MessagesView";
+import WorkView from "../views/work/WorkView.js";
+import MyView from "../views/my/MyView.js";
+import ProjectView from "../views/project/ProjectsView.js";
+import ContactsView from "../views/contact/ContactsView.js";
+import MessagesView from "../views/message/MessagesView";
+import MyCompany from "../views/my/MyCompany";
+import HelpView from "../views/my/HelpView";
+import SettingsView from "../views/my/SettingsView";
+import FeedBackView from "../views/my/FeedBackView";
+import ServiceView from "../views/my/ServiceView";
+import NewFunctionView from "../views/my/NewFunctionView";
+import PeopleCenterView from "../views/my/PeopleCenterView";
 import {Image} from "react-native";
 import {StackNavigator, TabNavigator} from "react-navigation";
 import CardStackStyleInterpolator from "react-navigation/src/views/CardStackStyleInterpolator";
@@ -115,6 +121,13 @@ const Stack = StackNavigator({
     SelectEntry: {screen: SelectEntryView},
     Login: {screen: LoginView},
     Home: {screen: homeTabNavigator},
+    MyCompany: {screen: MyCompany},
+    HelpView: {screen: HelpView},
+    SettingsView: {screen: SettingsView},
+    FeedBackView: {screen: FeedBackView},
+    ServiceView: {screen: ServiceView},
+    NewFunctionView: {screen: NewFunctionView},
+    PeopleCenterView: {screen: PeopleCenterView},
 }, {
     navigationOptions: {
         gesturesEnabled: true,
