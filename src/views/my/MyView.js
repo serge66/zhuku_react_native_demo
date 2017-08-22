@@ -4,6 +4,7 @@ import GV from "../../utils/GlobalVariable";
 import Image from "react-native-image-progress";
 import * as Progress from "react-native-progress";
 import Constants from "../../utils/Constants";
+import CallPhone from '../../native/android/CallPhone';
 
 const {height, width} = Dimensions.get('window');
 export default class MyView extends React.Component {
@@ -37,6 +38,10 @@ export default class MyView extends React.Component {
 
     _gotoPeopleCenter() {
         this.props.navigation.navigate('PeopleCenterView');
+    }
+
+    _gotoCallPhone() {
+        CallPhone.callPhone();
     }
 
     render() {
@@ -299,7 +304,10 @@ export default class MyView extends React.Component {
                         </TouchableOpacity>
                         <View style={styles.bottom}>
                             <Text style={[styles.bottom_info]}>全国服务热线:</Text>
-                            <Text style={[styles.bottom_info_num]}>400-777-3177</Text>
+                            <TouchableOpacity
+                                activeOpacity={Constants.ActiveOpacityNum} onPress={() => this._gotoCallPhone()}>
+                                <Text style={[styles.bottom_info_num]}>400-777-3177</Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </ScrollView>
