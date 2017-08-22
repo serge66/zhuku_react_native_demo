@@ -3,6 +3,7 @@ import {StyleSheet, View, Text, ScrollView, Dimensions, TouchableOpacity} from "
 import GV from "../../utils/GlobalVariable";
 import Image from "react-native-image-progress";
 import * as Progress from "react-native-progress";
+import Constants from "../../utils/Constants";
 
 const {height, width} = Dimensions.get('window');
 export default class MyView extends React.Component {
@@ -50,12 +51,14 @@ export default class MyView extends React.Component {
                         <View style={[styles.top]}>
                             <View>
                                 <TouchableOpacity
-                                    activeOpacity={0.8}
+                                    activeOpacity={Constants.ActiveOpacityNum}
                                     onPress={() => this._gotoPeopleCenter()}>
                                     {/*  indicator=[null, Progress.Bar, Progress.Circle, Progress.Pie]*/}
                                     <Image
                                         key={GV.USER_PORTRAIT}
-                                        source={{uri: GV.USER_PORTRAIT ? GV.USER_PORTRAIT : '../../assets/img/default_head.png'}}
+                                        source={GV.USER_PORTRAIT ?
+                                            {uri: GV.USER_PORTRAIT}
+                                            : require('../../assets/img/default_head.png')}
                                         indicator={Progress.Circle}
                                         style={styles.header}
                                         onLoaded={() => console.log('Image was loaded!')}
@@ -78,7 +81,7 @@ export default class MyView extends React.Component {
                         <View style={styles.shadow}/>
 
                         <TouchableOpacity
-                            activeOpacity={0.5}
+                            activeOpacity={Constants.ActiveOpacityNum}
                             onPress={() => this._gotoMyCompany()}>
                             <View style={styles.item}>
                                 <View style={styles.item_top}>
@@ -106,7 +109,7 @@ export default class MyView extends React.Component {
                         </TouchableOpacity>
 
                         <TouchableOpacity
-                            activeOpacity={0.5} onPress={() => this._gotoHelp()}>
+                            activeOpacity={Constants.ActiveOpacityNum} onPress={() => this._gotoHelp()}>
                             <View style={styles.item}>
                                 <View style={styles.item_top}>
                                     <View style={styles.item_left}>
@@ -134,7 +137,7 @@ export default class MyView extends React.Component {
 
 
                         <TouchableOpacity
-                            activeOpacity={0.5} onPress={() => this._gotoSettings()}>
+                            activeOpacity={Constants.ActiveOpacityNum} onPress={() => this._gotoSettings()}>
                             <View style={styles.item}>
                                 <View style={styles.item_top}>
                                     <View style={styles.item_left}>
@@ -161,7 +164,7 @@ export default class MyView extends React.Component {
                         </TouchableOpacity>
 
                         <TouchableOpacity
-                            activeOpacity={0.5} onPress={() => this._gotoFeedBack()}>
+                            activeOpacity={Constants.ActiveOpacityNum} onPress={() => this._gotoFeedBack()}>
                             <View style={styles.item}>
                                 <View style={styles.item_top}>
                                     <View style={styles.item_left}>
@@ -188,7 +191,7 @@ export default class MyView extends React.Component {
                         </TouchableOpacity>
 
                         <TouchableOpacity
-                            activeOpacity={0.5} onPress={() => this._gotoService()}>
+                            activeOpacity={Constants.ActiveOpacityNum} onPress={() => this._gotoService()}>
                             <View style={styles.item}>
                                 <View style={styles.item_top}>
                                     <View style={styles.item_left}>
@@ -215,7 +218,7 @@ export default class MyView extends React.Component {
                         </TouchableOpacity>
 
                         <TouchableOpacity
-                            activeOpacity={0.5} onPress={() => this._gotoMyCompany()}>
+                            activeOpacity={Constants.ActiveOpacityNum} onPress={() => this._gotoMyCompany()}>
                             <View style={styles.item}>
                                 <View style={styles.item_top}>
                                     <View style={styles.item_left}>
@@ -242,7 +245,7 @@ export default class MyView extends React.Component {
                         </TouchableOpacity>
 
                         <TouchableOpacity
-                            activeOpacity={0.5} onPress={() => this._gotoMyCompany()}>
+                            activeOpacity={Constants.ActiveOpacityNum} onPress={() => this._gotoMyCompany()}>
                             <View style={styles.item}>
                                 <View style={styles.item_top}>
                                     <View style={styles.item_left}>
@@ -269,7 +272,7 @@ export default class MyView extends React.Component {
                         </TouchableOpacity>
 
                         <TouchableOpacity
-                            activeOpacity={0.5} onPress={() => this._gotoNewFunction()}>
+                            activeOpacity={Constants.ActiveOpacityNum} onPress={() => this._gotoNewFunction()}>
                             <View style={styles.item}>
                                 <View style={styles.item_top}>
                                     <View style={styles.item_left}>

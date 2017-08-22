@@ -11,5 +11,5 @@ export default {
 
     //推送跳转类目标示（类目在这里的意思是：已完成或者未完成或操作中）
     NOTIFACATION_FLAG: "notifacation_flag",
-
+    ActiveOpacityNum: 0.8,
 };

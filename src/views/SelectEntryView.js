@@ -1,7 +1,7 @@
 import React from "react";
 import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {NavigationActions} from "react-navigation";
-
+import Constants from "../utils/Constants";
 const backAction = NavigationActions.back({
     key: 'Splash'
 });
@@ -40,7 +40,7 @@ export default class SelectEntryView extends React.Component {
             <View style={[styles.flex]}>
                 < Image style={[styles.flex, styles.top]}
                         source={require('../assets/img/bg.jpg')}>
-                    <TouchableOpacity activeOpacity={1}
+                    <TouchableOpacity activeOpacity={Constants.ActiveOpacityNum}
                                       style={[styles.contentLayout]}
                                       onPress={() => this._loginClick()}>
                         <View style={[styles.contentLayoutView]}>
@@ -64,7 +64,7 @@ export default class SelectEntryView extends React.Component {
                         </View>
                     </TouchableOpacity>
 
-                    <TouchableOpacity activeOpacity={1}
+                    <TouchableOpacity activeOpacity={Constants.ActiveOpacityNum}
                                       style={[styles.contentLayout]}
                                       onPress={() => this.props.navigation.navigate('Login')}>
                         <View style={[styles.contentLayoutView]}>
@@ -89,7 +89,7 @@ export default class SelectEntryView extends React.Component {
                         </View>
                     </TouchableOpacity>
 
-                    <TouchableOpacity activeOpacity={1}
+                    <TouchableOpacity activeOpacity={Constants.ActiveOpacityNum}
                                       style={[styles.contentLayout]}
                                       onPress={() => this.props.navigation.navigate('Login')}>
                         <View style={[styles.contentLayoutView]}>
@@ -113,7 +113,7 @@ export default class SelectEntryView extends React.Component {
                         </View>
                     </TouchableOpacity>
 
-                    <TouchableOpacity activeOpacity={1}
+                    <TouchableOpacity activeOpacity={Constants.ActiveOpacityNum}
                                       style={[styles.contentLayout]}
                                       onPress={() => this.props.navigation.navigate('Login')}>
                         <View style={[styles.contentLayoutView]}>
