@@ -5,6 +5,7 @@ import * as Progress from "react-native-progress";
 import GV from "../utils/GlobalVariable";
 
 const {height, width} = Dimensions.get('window');
+
 export default class LoginView extends React.Component {
     constructor(props) {
         super(props);

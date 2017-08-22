@@ -1,5 +1,5 @@
 import React from "react";
-import {StyleSheet, View, Text, ScrollView, Dimensions, TouchableOpacity} from "react-native";
+import {Dimensions, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import GV from "../../utils/GlobalVariable";
 import Image from "react-native-image-progress";
 import * as Progress from "react-native-progress";
@@ -41,7 +41,11 @@ export default class MyView extends React.Component {
     }
 
     _gotoCallPhone() {
-        CallPhone.callPhone();
+        if (Platform.OS === 'ios') {
+
+        } else {
+            CallPhone.callPhone();
+        }
     }
 
     render() {
