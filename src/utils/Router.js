@@ -16,7 +16,7 @@ import NewFunctionView from "../views/my/NewFunctionView";
 import PeopleCenterView from "../views/my/PeopleCenterView";
 import {Image} from "react-native";
 import {StackNavigator, TabNavigator} from "react-navigation";
-import CardStackStyleInterpolator from "react-navigation/src/views/CardStackStyleInterpolator";
+import CardStackStyleInterpolator from "react-navigation/src/views/CardStack/CardStackStyleInterpolator";
 
 const resizeMode = 'center';//resizeMode enum('cover', 'contain', 'stretch', 'repeat', 'center')
 
@@ -151,11 +151,6 @@ const Stack = StackNavigator({
          2、从下向上：  forVertical；
          3、安卓那种的从下向上： forFadeFromBottomAndroid；
          4、无动画：  forInitial。
-
-
-
-
-
          * */
         screenInterpolator: CardStackStyleInterpolator.forHorizontal,
     }),

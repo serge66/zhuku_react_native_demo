@@ -16,6 +16,7 @@ export default class ContactsView extends React.Component {
             headerStyle: {
                 backgroundColor: "white"
             },
+            
             headerTitleStyle: {
                 alignSelf: 'center'
             },
