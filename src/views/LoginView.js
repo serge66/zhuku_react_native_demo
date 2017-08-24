@@ -146,7 +146,7 @@ export default class LoginView extends React.Component {
                     <View>
                         <Image style={{width: 80, height: 100}}
                                resizeMode={'center'}
-                               source={require('../assets/img/logo_alone.png')}/>
+                               source={require('../assets/img/login/Login_Logo.png')}/>
                     </View>
                     <View style={styles.content}>{/*中间的两个输入模块*/}
                         <View style={styles.account_pwd_line}>

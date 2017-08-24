@@ -39,7 +39,7 @@ export default class SelectEntryView extends React.Component {
         return (
             <View style={[styles.flex]}>
                 < Image style={[styles.flex, styles.top]}
-                        source={require('../assets/img/bg.jpg')}>
+                        source={require('../assets/img/login/Home_PageView_Bg.png')}>
                     <TouchableOpacity activeOpacity={Constants.ActiveOpacityNum}
                                       style={[styles.contentLayout]}
                                       onPress={() => this._loginClick()}>
@@ -48,7 +48,7 @@ export default class SelectEntryView extends React.Component {
                                 <View style={styles.titleLayout}>
                                     <View>
                                         < Image style={styles.leftImage}
-                                                source={require('../assets/img/sign_in.png')}></Image>
+                                                source={require('../assets/img/login/Home_Login.png')}></Image>
                                     </View>
                                     <View>
                                         <Text style={styles.titleText}>立即登录</Text>
@@ -59,7 +59,7 @@ export default class SelectEntryView extends React.Component {
                                 </View>
                             </View>
                             <View>
-                                <Image style={styles.arrowImage} source={require('../assets/img/get_into.png')}/>
+                                <Image style={styles.arrowImage} source={require('../assets/img/login/Home_Arrow.png')}/>
                             </View>
                         </View>
                     </TouchableOpacity>
@@ -72,7 +72,7 @@ export default class SelectEntryView extends React.Component {
                                 <View style={styles.titleLayout}>
                                     < View >
                                         < Image style={styles.leftImage}
-                                                source={require('../assets/img/join_enterprise.png')}></Image>
+                                                source={require('../assets/img/login/Home_Join.png')}></Image>
                                     </View>
                                     <View>
                                         <Text style={styles.titleText}>加入企业</Text>
@@ -83,7 +83,7 @@ export default class SelectEntryView extends React.Component {
                                 </View>
                             </View>
                             <View>
-                                <Image style={styles.arrowImage} source={require('../assets/img/get_into.png')}/>
+                                <Image style={styles.arrowImage} source={require('../assets/img/login/Home_Arrow.png')}/>
                             </View>
 
                         </View>
@@ -97,7 +97,7 @@ export default class SelectEntryView extends React.Component {
                                 <View style={styles.titleLayout}>
                                     <View>
                                         <Image style={styles.leftImage}
-                                               source={require('../assets/img/create_enterprise.png')}></Image>
+                                               source={require('../assets/img/login/Home_Create.png')}></Image>
                                     </View>
                                     <View>
                                         <Text style={styles.titleText}>创建企业</Text>
@@ -108,7 +108,7 @@ export default class SelectEntryView extends React.Component {
                                 </View>
                             </View>
                             <View>
-                                <Image style={styles.arrowImage} source={require('../assets/img/get_into.png')}/>
+                                <Image style={styles.arrowImage} source={require('../assets/img/login/Home_Arrow.png')}/>
                             </View>
                         </View>
                     </TouchableOpacity>
@@ -121,7 +121,7 @@ export default class SelectEntryView extends React.Component {
                                 <View style={styles.titleLayout}>
                                     <View >
                                         <Image style={styles.leftImage}
-                                               source={require('../assets/img/supervise.png')}></Image>
+                                               source={require('../assets/img/login/Home_Supervise.png')}></Image>
                                     </View>
                                     <View>
                                         <Text style={styles.titleText}>业主监督</Text>
@@ -132,7 +132,7 @@ export default class SelectEntryView extends React.Component {
                                 </View>
                             </View>
                             <View>
-                                <Image style={styles.arrowImage} source={require('../assets/img/get_into.png')}/>
+                                <Image style={styles.arrowImage} source={require('../assets/img/login/Home_Arrow.png')}/>
                             </View>
                         </View>
                     </TouchableOpacity>

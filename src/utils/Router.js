@@ -27,8 +27,8 @@ const homeTabNavigator = TabNavigator({
             tabBarLabel: '消息',
             tabBarIcon: ({tintColor, focused}) => (
                 <Image
-                    source={focused ? require('../assets/img/iocn_xiaoxi_light.png')
-                        : require('../assets/img/icon_xiaoxi.png')}
+                    source={focused ? require('../assets/img/main/tabbar_message_light.png')
+                        : require('../assets/img/main/tabbar_message.png')}
                     resizeMode={resizeMode}/>
             ),
         },
@@ -39,8 +39,8 @@ const homeTabNavigator = TabNavigator({
             tabBarLabel: '工作台',
             tabBarIcon: ({tintColor, focused}) => (
                 <Image
-                    source={focused ? require('../assets/img/icon_banggong_light.png')
-                        : require('../assets/img/icon_banggong.png')}
+                    source={focused ? require('../assets/img/main/tabbar_settingselect.png')
+                        : require('../assets/img/main/tabbar_workbench.png')}
                     resizeMode={resizeMode}/>
             ),
         },
@@ -51,8 +51,8 @@ const homeTabNavigator = TabNavigator({
             tabBarLabel: '项目',
             tabBarIcon: ({tintColor, focused}) => (
                 <Image
-                    source={focused ? require('../assets/img/icon_tab_yingyong_light.png')
-                        : require('../assets/img/icon_tab_yingyong.png')}
+                    source={focused ? require('../assets/img/main/tabbar_projectselect.png')
+                        : require('../assets/img/main/tabbar_project.png')}
                     resizeMode={resizeMode}/>
             ),
         },
@@ -63,8 +63,8 @@ const homeTabNavigator = TabNavigator({
             tabBarLabel: '联系人',
             tabBarIcon: ({tintColor, focused}) => (
                 <Image
-                    source={focused ? require('../assets/img/icon_contacts_line_light.png')
-                        : require('../assets/img/icon_contacts_line.png')}
+                    source={focused ? require('../assets/img/main/tabbar_constant_light.png')
+                        : require('../assets/img/main/tabbar_constant.png')}
                     resizeMode={resizeMode}/>
             ),
         },
@@ -75,8 +75,8 @@ const homeTabNavigator = TabNavigator({
             tabBarLabel: '我的',
             tabBarIcon: ({tintColor, focused}) => (
                 <Image
-                    source={focused ? require('../assets/img/icon_wode_light.png')
-                        : require('../assets/img/icon_wode.png')}
+                    source={focused ? require('../assets/img/main/tabbar_settingselect.png')
+                    : require('../assets/img/main/tabbar_setting.png')}
                     resizeMode={resizeMode}/>
             ),
         },

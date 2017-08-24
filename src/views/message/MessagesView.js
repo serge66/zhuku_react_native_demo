@@ -49,7 +49,7 @@ export default class MessagesView extends React.Component {
         return (
             <View style={[styles.flex, styles.top]}>
                 <Image style={styles.bottom}
-                       source={require('../../assets/img/splash_logo.png')}></Image>
+                       source={require('../../assets/img/login/splash_logo.png')}></Image>
             </View>
         );
     };

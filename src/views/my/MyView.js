@@ -67,7 +67,7 @@ export default class MyView extends React.Component {
                                         key={GV.USER_PORTRAIT}
                                         source={GV.USER_PORTRAIT ?
                                             {uri: GV.USER_PORTRAIT}
-                                            : require('../../assets/img/default_head.png')}
+                                            : require('../../assets/img/setting/home/default_head_portrait.png')}
                                         indicator={Progress.Circle}
                                         style={styles.header}
                                         onLoaded={() => console.log('Image was loaded!')}
@@ -97,7 +97,7 @@ export default class MyView extends React.Component {
                                     <View style={styles.item_left}>
                                         <View>
                                             <Image style={styles.item_icon}
-                                                   source={require('../../assets/img/icon_my_wodeqiye.png')}/>
+                                                   source={require('../../assets/img/setting/home/setting_mycompany.png')}/>
                                         </View>
                                         <View>
                                             <Text style={styles.item_title}>我的企业</Text>
@@ -109,7 +109,7 @@ export default class MyView extends React.Component {
                                         </View>
                                         <View>
                                             <Image style={styles.item_arrow}
-                                                   source={require('../../assets/img/icon_right_arrow.png')}/>
+                                                   source={require('../../assets/img/configs/listitem_arrow.png')}/>
                                         </View>
                                     </View>
                                 </View>
@@ -124,7 +124,7 @@ export default class MyView extends React.Component {
                                     <View style={styles.item_left}>
                                         <View>
                                             <Image style={styles.item_icon}
-                                                   source={require('../../assets/img/icon_my_xinshou.png')}/>
+                                                   source={require('../../assets/img/setting/home/setting_help.png')}/>
                                         </View>
                                         <View>
                                             <Text style={styles.item_title}>新手帮助</Text>
@@ -136,7 +136,7 @@ export default class MyView extends React.Component {
                                         </View>
                                         <View>
                                             <Image style={styles.item_arrow}
-                                                   source={require('../../assets/img/icon_right_arrow.png')}/>
+                                                   source={require('../../assets/img/configs/listitem_arrow.png')}/>
                                         </View>
                                     </View>
                                 </View>
@@ -152,7 +152,7 @@ export default class MyView extends React.Component {
                                     <View style={styles.item_left}>
                                         <View>
                                             <Image style={styles.item_icon}
-                                                   source={require('../../assets/img/icon_my_shezhi.png')}/>
+                                                   source={require('../../assets/img/setting/home/setting_settings.png')}/>
                                         </View>
                                         <View>
                                             <Text style={styles.item_title}>设置</Text>
@@ -164,7 +164,7 @@ export default class MyView extends React.Component {
                                         </View>
                                         <View>
                                             <Image style={styles.item_arrow}
-                                                   source={require('../../assets/img/icon_right_arrow.png')}/>
+                                                   source={require('../../assets/img/configs/listitem_arrow.png')}/>
                                         </View>
                                     </View>
                                 </View>
@@ -179,7 +179,7 @@ export default class MyView extends React.Component {
                                     <View style={styles.item_left}>
                                         <View>
                                             <Image style={styles.item_icon}
-                                                   source={require('../../assets/img/icon_my_yijian.png')}/>
+                                                   source={require('../../assets/img/setting/home/setting_feedback.png')}/>
                                         </View>
                                         <View>
                                             <Text style={styles.item_title}>意见反馈</Text>
@@ -191,7 +191,7 @@ export default class MyView extends React.Component {
                                         </View>
                                         <View>
                                             <Image style={styles.item_arrow}
-                                                   source={require('../../assets/img/icon_right_arrow.png')}/>
+                                                   source={require('../../assets/img/configs/listitem_arrow.png')}/>
                                         </View>
                                     </View>
                                 </View>
@@ -206,7 +206,7 @@ export default class MyView extends React.Component {
                                     <View style={styles.item_left}>
                                         <View>
                                             <Image style={styles.item_icon}
-                                                   source={require('../../assets/img/icon_my_kefu.png')}/>
+                                                   source={require('../../assets/img/setting/home/setting_service.png')}/>
                                         </View>
                                         <View>
                                             <Text style={styles.item_title}>客服</Text>
@@ -218,7 +218,7 @@ export default class MyView extends React.Component {
                                         </View>
                                         <View>
                                             <Image style={styles.item_arrow}
-                                                   source={require('../../assets/img/icon_right_arrow.png')}/>
+                                                   source={require('../../assets/img/configs/listitem_arrow.png')}/>
                                         </View>
                                     </View>
                                 </View>
@@ -233,7 +233,7 @@ export default class MyView extends React.Component {
                                     <View style={styles.item_left}>
                                         <View>
                                             <Image style={styles.item_icon}
-                                                   source={require('../../assets/img/icon_my_tuijian.png')}/>
+                                                   source={require('../../assets/img/setting/home/setting_recom.png')}/>
                                         </View>
                                         <View>
                                             <Text style={styles.item_title}>推荐筑库</Text>
@@ -245,7 +245,7 @@ export default class MyView extends React.Component {
                                         </View>
                                         <View>
                                             <Image style={styles.item_arrow}
-                                                   source={require('../../assets/img/icon_right_arrow.png')}/>
+                                                   source={require('../../assets/img/configs/listitem_arrow.png')}/>
                                         </View>
                                     </View>
                                 </View>
@@ -260,7 +260,7 @@ export default class MyView extends React.Component {
                                     <View style={styles.item_left}>
                                         <View>
                                             <Image style={styles.item_icon}
-                                                   source={require('../../assets/img/icon_my_wodeqiye.png')}/>
+                                                   source={require('../../assets/img/setting/home/setting_recom.png')}/>
                                         </View>
                                         <View>
                                             <Text style={styles.item_title}>切换内外网</Text>
@@ -272,7 +272,7 @@ export default class MyView extends React.Component {
                                         </View>
                                         <View>
                                             <Image style={styles.item_arrow}
-                                                   source={require('../../assets/img/icon_right_arrow.png')}/>
+                                                   source={require('../../assets/img/configs/listitem_arrow.png')}/>
                                         </View>
                                     </View>
                                 </View>
@@ -287,7 +287,7 @@ export default class MyView extends React.Component {
                                     <View style={styles.item_left}>
                                         <View>
                                             <Image style={styles.item_icon}
-                                                   source={require('../../assets/img/icon_my_wodeqiye.png')}/>
+                                                   source={require('../../assets/img/setting/home/setting_recom.png')}/>
                                         </View>
                                         <View>
                                             <Text style={styles.item_title}>新功能</Text>
@@ -299,7 +299,7 @@ export default class MyView extends React.Component {
                                         </View>
                                         <View>
                                             <Image style={styles.item_arrow}
-                                                   source={require('../../assets/img/icon_right_arrow.png')}/>
+                                                   source={require('../../assets/img/configs/listitem_arrow.png')}/>
                                         </View>
                                     </View>
                                 </View>
