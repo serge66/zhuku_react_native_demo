@@ -5,6 +5,7 @@ import android.net.Uri;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import java.lang.String;
 
 public class CallPhoneModule extends ReactContextBaseJavaModule {
 
@@ -16,8 +17,8 @@ public class CallPhoneModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void callPhone() {
-        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + "4007773177"));
+    public void callPhone(String phoneString) {
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phoneString));
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         this.reactContext.startActivity(intent);
     }

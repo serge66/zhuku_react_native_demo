@@ -258,17 +258,21 @@ const styles = StyleSheet.create({
         fontSize: 15,
     },
     content: {
-        width: width,
-        height: height / 5,
+    //     width: width,
+    //     height: height / 5,
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
+        marginTop:height/10,
     },
     account_pwd: {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
         width: '80%',
+
+        // width: width,
+        height: height / 15,
     },
     account_pwd_line: {
         flexDirection: 'column',

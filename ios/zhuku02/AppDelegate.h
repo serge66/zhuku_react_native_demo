@@ -12,5 +12,7 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (nonatomic, strong) UIWindow *window;
+// 为解决调ios原生无效果而添加 lsj 
+// @property (nonatomic, strong) UINavigationController *nav;
 
 @end
