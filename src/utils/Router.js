@@ -16,7 +16,8 @@ import NewFunctionView from "../views/my/NewFunctionView";
 import PeopleCenterView from "../views/my/PeopleCenterView";
 import {Image} from "react-native";
 import {StackNavigator, TabNavigator} from "react-navigation";
-import CardStackStyleInterpolator from "react-navigation/src/views/CardStack/CardStackStyleInterpolator";
+// import CardStackStyleInterpolator from "react-navigation/src/views/CardStack/CardStackStyleInterpolator";
+import CardStackStyleInterpolator from "react-navigation/src/views/CardStackStyleInterpolator";
 
 const resizeMode = 'center';//resizeMode enum('cover', 'contain', 'stretch', 'repeat', 'center')
 
