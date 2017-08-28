@@ -12,7 +12,7 @@ import GV from "../../utils/GlobalVariable";
 import Image from "react-native-image-progress";
 import * as Progress from "react-native-progress";
 import Constants from "../../utils/Constants";
-import CallPhone from '../../native/android/CallPhone';
+import CallPhone from '../../native/CallPhone';
 import ToastUtils from '../../utils/ToastUtils';
 
 const {height, width} = Dimensions.get('window');

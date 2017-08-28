@@ -11,7 +11,7 @@ import {
 import ToastUtils from "../utils/ToastUtils.js";
 import * as Progress from "react-native-progress";
 import GV from "../utils/GlobalVariable";
-import { NavigationActions }from "react-navigation";
+import {NavigationActions} from "react-navigation";
 
 var Buffer = require('buffer').Buffer;
 var account = '';
@@ -58,7 +58,8 @@ export default class LoginView extends React.Component {
         if (response.ok) {
             var headers = response.headers;
             console.log(headers.get('Content-Type'));
-            console.log('从header种获取的token：' + headers.get('X-REST-TOKEN'));
+            GV.ACCESS_TOKEN = headers.get('X-REST-TOKEN');
+            console.log('从header种获取的token：' + GV.ACCESS_TOKEN);
 
             console.log(response.status);
             console.log(response.statusText);
@@ -94,11 +95,8 @@ export default class LoginView extends React.Component {
         console.log(responseJson);
         // console.log(responseJson.statusCode); alert(responseJson);
         if (responseJson.success) {
-            // thiz._paramsToLastPage();
-            // thiz
-            //     .props
-            //     .navigation
-            //     .navigate('Home');
+            // thiz._paramsToLastPage(); thiz     .props     .navigation
+            // .navigate('Home');
 
             let navigateAction = NavigationActions.reset({
                 index: 0,
@@ -123,7 +121,7 @@ export default class LoginView extends React.Component {
 
     _loginData() {
         if (account == '' || pwd == '') {
-            account = 'wxd';
+            account = 'lsj';
             pwd = '12345678'
         }
         console.log(account + pwd);

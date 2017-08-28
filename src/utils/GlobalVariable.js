@@ -1,4 +1,4 @@
-const Gv = {
+var Gv = {
 
     /**
      * 用户昵称，默认为null,测试时 江苏沃因思
@@ -24,6 +24,10 @@ const Gv = {
      * 用户头像URL
      */
     USER_PORTRAIT: "",
+
+    name(params) {
+        
+    },
 
     /**
      * 用户帐号，默认为null,暂时调试为1
@@ -175,8 +179,15 @@ const Gv = {
      * 计数器，计算应用前后台
      * activityCount>:1，那么就是前台，activityCount::0，那就是后台
      */
-    activityCount: 0
+    activityCount: 0,
+
 
 };
+
+function name(){
+
+};
+
+Gv.name = name;
 
 export default Gv;

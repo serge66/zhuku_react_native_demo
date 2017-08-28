@@ -85,7 +85,7 @@ const homeTabNavigator = TabNavigator({
 }, {
     tabBarPosition: 'bottom',
     animationEnabled: true,
-    lazy: false,
+    lazy: true,
     backBehavior: 'none', // 按 back 键是否跳转到第一个Tab(首页)， none 为不跳转
     cardStack: {
         gesturesEnabled: true,
