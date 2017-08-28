@@ -1,4 +1,4 @@
-export default {
+const Constants= {
     url: 'http://a.app.qq.com/o/simple.jsp?pkgname:user.zhuku.com',
     text: "全国建筑企业管理软件",
     title: "筑库",
@@ -12,4 +12,15 @@ export default {
     //推送跳转类目标示（类目在这里的意思是：已完成或者未完成或操作中）
     NOTIFACATION_FLAG: "notifacation_flag",
     ActiveOpacityNum: 0.8,
+
+    //------保存在store中的key,注意key中不可以使用_下划线
+    USER_NAME:'USERNAME',
+    USER_DEPARTMENT_ID:'USERDEPARTMENTID',
+    USER_DEPARTMENT:'USERDEPARTMENT',
+    USER_PHONE:'USERPHONE',
+    USER_ACCOUNTS:'USERACCOUNTS',
 };
+
+global.constants = Constants;
+
+export default Constants;

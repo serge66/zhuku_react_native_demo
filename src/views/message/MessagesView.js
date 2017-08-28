@@ -92,23 +92,50 @@ export default class MessagesView extends React.Component {
         return res.json()
     }
 
+
+    _saveData(responseJson) {
+        var data = responseJson.data;
+        global.gv.setUserName(data.f_name);
+        // GV.USER_NAME = data.f_name;
+        GV.USER_DEPARTMENT_ID = data.f_department_id;
+        GV.USER_DEPARTMENT = data.f_department_name;
+        GV.USER_PHONE = data.f_telephone;
+        GV.USER_ACCOUNTS = data.f_account;
+
+        // 使用key来保存数据。这些数据一般是全局独有的，常常需要调用的。 除非你手动移除，这些数据会被永久保存，而且默认不会过期。
+        storage.save({
+            key: global.constants.USER_PHONE, // 注意:请不要在key中使用_下划线符号!
+            data: data.f_telephone,
+
+            // 如果不指定过期时间，则会使用defaultExpires参数 如果设为null，则永不过期
+            // expires: 1000 * 3600
+        });
+        
+        storage.save({
+            key: global.constants.USER_DEPARTMENT_ID, // 注意:请不要在key中使用_下划线符号!
+            data: data.f_department_id,
+        });
+        storage.save({
+            key: global.constants.USER_DEPARTMENT, // 注意:请不要在key中使用_下划线符号!
+            data: data.f_department_name,
+        });
+        storage.save({
+            key: global.constants.USER_ACCOUNTS, // 注意:请不要在key中使用_下划线符号!
+            data: data.f_account,
+        });
+    }
+
     _parseJson(responseJson) {
         console.log(responseJson);
         // console.log(responseJson.statusCode); alert(responseJson);
         if (responseJson.success) {
             // thiz._paramsToLastPage(); thiz     .props     .navigation .navigate('Home');
             // let navigateAction = NavigationActions.reset({     index: 0,     actions: [
-            //   NavigationActions.navigate({routeName: 'Home'}), //or routeName:'Main' ]
-            // }); thiz     .props     .navigation     .dispatch(navigateAction);
+            // NavigationActions.navigate({routeName: 'Home'}), //or routeName:'Main' ] });
+            // thiz     .props     .navigation     .dispatch(navigateAction);
 
-            if(responseJson.data){
-                var data = responseJson.data;
-                GV.USER_NAME = data.f_name;
-                GV.USER_DEPARTMENT_ID = data.f_department_id;
-                GV.USER_DEPARTMENT = data.f_department_name;
-                GV.USER_PHONE = data.f_telephone;
-                GV.USER_ACCOUNTS = data.f_account;
-                
+            if (responseJson.data) {
+                thiz._saveData(responseJson);
             }
         } else {
             ToastUtils.show("网络连接失败，请重连后重试");
