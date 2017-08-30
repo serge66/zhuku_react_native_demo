@@ -1,3 +1,5 @@
+"use strict";
+
 import React from "react";
 import {
     Dimensions,
@@ -82,6 +84,7 @@ export default class LoginView extends React.Component {
 
             return Promise.resolve(response)
         } else {
+            //TODO 此处登录失败会出现红色弹窗，需优化
             return Promise.reject(new Error(response.statusText))
         }
     }

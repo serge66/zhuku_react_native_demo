@@ -1,3 +1,5 @@
+"use strict";
+
 import React from "react";
 import {
     Dimensions,
@@ -6,7 +8,7 @@ import {
     StyleSheet,
     Text,
     TouchableOpacity,
-    View,
+    View
 } from "react-native";
 import GV from "../../utils/GlobalVariable";
 import Image from "react-native-image-progress";
@@ -103,7 +105,9 @@ export default class MyView extends React.Component {
                             <View style={styles.info}>
                                 <View style={styles.name_post}>
                                     <View>
-                                        <Text style={styles.name}>{global.gv.getUserName()}</Text>
+                                        <Text style={styles.name}>{global
+                                                .gv
+                                                .getUserName()}</Text>
                                     </View>
                                     <View>
                                         <Text style={styles.post}>{GV.USER_JOB

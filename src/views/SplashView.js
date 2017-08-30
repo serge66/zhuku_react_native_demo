@@ -1,5 +1,8 @@
+"use strict";
+
 import React from "react";
 import {Image, StyleSheet, View} from "react-native";
+import {NavigationActions} from "react-navigation";
 
 export default class SplashView extends React.Component {
     constructor(props) {
@@ -18,14 +21,24 @@ export default class SplashView extends React.Component {
     componentDidMount() {
         this.timer = setTimeout(
             () => {
-
-                this.props.navigation.navigate('SelectEntry', {
-                    callback: (data) => {
-                        console.log('splashView callback: ' + data);
-                        this._paramsToLastPage();
-
-                    }
+                let navigateAction = NavigationActions.reset({
+                    index: 0,
+                    actions: [
+                        NavigationActions.navigate({routeName: 'SelectEntry'}), //or routeName:'Main'
+                    ]
                 });
+                this
+                    .props
+                    .navigation
+                    .dispatch(navigateAction);
+
+                // this.props.navigation.navigate('SelectEntry', {
+                //     callback: (data) => {
+                //         console.log('splashView callback: ' + data);
+                //         this._paramsToLastPage();
+
+                //     }
+                // });
             },
             1000
         );
