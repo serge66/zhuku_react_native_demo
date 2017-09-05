@@ -1,9 +1,17 @@
 # zhuku_react_native_demo
     
-    ## Using the step
-        npm install
+    Support
+        iOS & Android
 
-    ## dependencies：
+    Installation
+        git clone https://github.com/serge66/zhuku_react_native_demo.git
+        cd zhuku_react_native_demo & npm install
+
+    Run
+        react-native run-ios
+        react-native run-android
+
+    Dependencies：
         "buffer": "^5.0.7",
         "react": "16.0.0-alpha.12",
         "react-native": "0.47.1",
@@ -16,10 +24,10 @@
         "react-native-storage": "^0.2.2",
         "react-navigation": "^1.0.0-beta.11",
         "react-redux": "^5.0.6",
-        "react-thunk": "^1.0.0"(npm WARN react-thunk@1.0.0 requires a peer of react@~0.14.0 || ^15.0.0 but none was installed),
-        "redux": "^3.7.2"
+        "redux": "^3.7.2",
+        "redux-thunk": "^2.2.0",
 
-    ## devDependencies:
+    DevDependencies:
         "babel-jest": "20.0.3",
         "babel-preset-react-native": "2.1.0",
         "jest": "20.0.4",

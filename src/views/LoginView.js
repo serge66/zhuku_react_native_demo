@@ -13,7 +13,10 @@ import {
 import ToastUtils from "../utils/ToastUtils.js";
 import * as Progress from "react-native-progress";
 import GV from "../utils/GlobalVariable";
+import Constants from "../utils/Constants";
 import {NavigationActions} from "react-navigation";
+import {doLogin} from '../actions/Login';
+import {connect} from 'react-redux';
 
 var Buffer = require('buffer').Buffer;
 var account = '';
@@ -21,7 +24,7 @@ var pwd = '';
 const {height, width} = Dimensions.get('window');
 var thiz;
 
-export default class LoginView extends React.Component {
+class LoginView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -45,7 +48,7 @@ export default class LoginView extends React.Component {
     _requestObj() {
         var auth = 'Basic ' + new Buffer(account + ':' + pwd).toString('base64');
         console.log(auth + '--' + new Buffer('wxd:12345678').toString('base64'));
-        return new Request('http://121.43.163.28:18080/zkpms-api/api/platform/security/token', {
+        return new Request(global.constants.BASE_URL+'api/platform/security/token', {
             method: 'POST',
             headers: {
                 'Authorization': auth
@@ -98,8 +101,7 @@ export default class LoginView extends React.Component {
         console.log(responseJson);
         // console.log(responseJson.statusCode); alert(responseJson);
         if (responseJson.success) {
-            // thiz._paramsToLastPage(); thiz     .props     .navigation
-            // .navigate('Home');
+            // thiz._paramsToLastPage(); thiz     .props     .navigation .navigate('Home');
 
             let navigateAction = NavigationActions.reset({
                 index: 0,
@@ -124,7 +126,7 @@ export default class LoginView extends React.Component {
 
     _loginData() {
         if (account == '' || pwd == '') {
-            account = 'lsj';
+            account = 'w';
             pwd = '12345678'
         }
         console.log(account + pwd);
@@ -155,7 +157,11 @@ export default class LoginView extends React.Component {
             mode: 'cors',
             credentials: 'include',
             // body: this.formData,
-            body: JSON.stringify({'userAccount': this.state.account, 'userPassword': this.state.pwd, 'appKey': this.state.key})
+            body: JSON.stringify({
+                'userAccount': this.state.account,
+                'userPassword': this.state.pwd,
+                'appKey': this.state.key
+            })
         }).then((response) => response.json()).then((responseJson) => {
             this.setState({isShowProgress: false});
             console.log(responseJson);
@@ -199,9 +205,21 @@ export default class LoginView extends React.Component {
 
     login_click() {
         // 可以用 const reindexToken = await AsyncStorage.getItem('REINDEX_TOKEN');存取
-        // this.props.navigation.goBack(); this._postData();
-        this._loginData();
+        // this.props.navigation.goBack(); this._postData(); this._loginData();
         // this._getData(); this._paramsToLastPage();
+
+        if (account == '' || pwd == '') {
+            account = 'SuperAdmin';
+            pwd = '12345678'
+        }
+
+        let opt = {
+            'account': account,
+            'pwd': pwd
+        };
+        this
+            .props
+            .dispatch(doLogin(opt));
     }
 
     _paramsToLastPage() {
@@ -225,21 +243,57 @@ export default class LoginView extends React.Component {
         goBack(null);
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log(nextProps.status + "--" + nextState.data);
+        if (nextProps.status == 'doing' && nextProps.isSuccess == false) {
+            console.log('11111111');
+            this.setState({isShowProgress: true});
+            return false;
+        }
+        if (nextProps.status == 'success' && nextProps.isSuccess == true) {
+            this.setState({isShowProgress: false});
+            let navigateAction = NavigationActions.reset({
+                index: 0,
+                actions: [
+                    NavigationActions.navigate({routeName: 'Home'}), //or routeName:'Main'
+                ]
+            });
+            thiz
+                .props
+                .navigation
+                .dispatch(navigateAction);
+            console.log('2222');
+            return false;
+        }
+        if (nextProps.status == 'error' && nextProps.isSuccess == false) {
+            this.setState({isShowProgress: false});
+            console.log('33333');
+            return false;
+        }
+
+        return true;
+    }
+    componentWillUpdate(){
+        console.log('updata.......')
+    }
+
     render() {
         return (
             <View style={[styles.flex, styles.posi]}>
                 <View style={[styles.flex, styles.top, styles.topContent]}>
                     <View style={styles.homePage}>
-                        <TouchableOpacity activeOpacity={1} onPress={() => this.select_entry_click()}>
+                        <TouchableOpacity
+                            activeOpacity={Constants.ActiveOpacityNum}
+                            onPress={() => this.select_entry_click()}>
                             <Text style={styles.homePageText}>首页</Text>
                         </TouchableOpacity>
                     </View>
                     <View>
                         <Image
                             style={{
-                            width: 80,
-                            height: 100
-                        }}
+                                width: 80,
+                                height: 100
+                            }}
                             resizeMode={'center'}
                             source={require('../assets/img/login/Login_Logo.png')}/>
                     </View>
@@ -257,10 +311,10 @@ export default class LoginView extends React.Component {
                                     underlineColorAndroid={'transparent'}
                                     keyboardType={'ascii-capable'}
                                     onChangeText={(text) => {
-                                    {/* this.setState({ account: text, }); */
-                                    }
-                                    account = text;
-                                }}/>
+                                        {/* this.setState({ account: text, }); */
+                                        }
+                                        account = text;
+                                    }}/>
                             </View>
                             <View style={styles.line}>{/*一条线*/}
                             </View>
@@ -279,21 +333,25 @@ export default class LoginView extends React.Component {
                                     underlineColorAndroid={'transparent'}
                                     keyboardType={'ascii-capable'}
                                     onChangeText={(text) => {
-                                    {/* this.setState({ pwd: text, }); */
-                                    }
-                                    pwd = text;
-                                }}/>
+                                        {/* this.setState({ pwd: text, }); */
+                                        }
+                                        pwd = text;
+                                    }}/>
                             </View>
                             <View style={styles.line}>{/*一条线*/}
                             </View>
                         </View>
                     </View>
-                    <TouchableOpacity activeOpacity={1} onPress={() => this.login_click()}>
+                    <TouchableOpacity
+                        activeOpacity={Constants.ActiveOpacityNum}
+                        onPress={() => this.login_click()}>
                         <View style={styles.loginLayout}>
                             <Text style={styles.loginText}>登录</Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity activeOpacity={1} onPress={() => this.forgot_click()}>
+                    <TouchableOpacity
+                        activeOpacity={Constants.ActiveOpacityNum}
+                        onPress={() => this.forgot_click()}>
                         <View>
                             <Text style={styles.forgotText}>忘记密码?</Text>
                         </View>
@@ -307,7 +365,7 @@ export default class LoginView extends React.Component {
                         </View>
                     )
                     : (null)
-}
+                }
 
             </View>
         );
@@ -416,3 +474,9 @@ const styles = StyleSheet.create({
         height: height
     }
 });
+
+function select(store) {
+    return {status: store.loginIn.status, isSuccess: store.loginIn.isSuccess, data: store.loginIn.data}
+}
+
+export default connect(select)(LoginView);

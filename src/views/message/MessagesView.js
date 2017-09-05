@@ -46,7 +46,7 @@ export default class MessagesView extends React.Component {
 
     _requestObj() {
         console.log('---' + GV.ACCESS_TOKEN);
-        return new Request('http://121.43.163.28:18080/zkpms-api/api/admin/index/user', {
+        return new Request(global.constants.BASE_URL+'api/admin/index/user', {
             method: 'GET',
             headers: {
                 'X-REST-TOKEN': GV.ACCESS_TOKEN

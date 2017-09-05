@@ -19,6 +19,11 @@ const Constants= {
     USER_DEPARTMENT:'USERDEPARTMENT',
     USER_PHONE:'USERPHONE',
     USER_ACCOUNTS:'USERACCOUNTS',
+    SERVER_ERROR:'网络连接失败,请检查网络后重试',
+    //内网
+    BASE_URL:'http://192.168.31.4:48080/zkpms-api/',
+    //自验证环境
+    // BASE_URL:'http://121.43.163.28:18080/zkpms-api/',
 };
 
 global.constants = Constants;
