@@ -17,6 +17,7 @@ import Constants from "../utils/Constants";
 import {NavigationActions} from "react-navigation";
 import {doLogin} from '../actions/Login';
 import {connect} from 'react-redux';
+import ProgressDialogCS from '../component/ProgressDialogCS';
 
 var Buffer = require('buffer').Buffer;
 var account = '';
@@ -360,18 +361,12 @@ class LoginView extends React.Component {
 
                 </View>
                 {this.props.isShowProgress === true
-                    ? (
-                        <View style={[styles.progressContent, styles.flex]}>
-                            <Progress.CircleSnail style={[styles.progress]} color={['#2196F3']} size={60}/>
-                        </View>
-                    )
+                    ? ( <ProgressDialogCS/> )
                     : (null)
                 }
-
             </View>
         );
     }
-
 }
 
 const styles = StyleSheet.create({
@@ -481,7 +476,7 @@ function select(store) {
         status: store.loginIn.status,
         isSuccess: store.loginIn.isSuccess,
         data: store.loginIn.data,
-        isShowProgress:store.loginIn.isShowProgress,
+        isShowProgress: store.loginIn.isShowProgress,
     }
 }
 

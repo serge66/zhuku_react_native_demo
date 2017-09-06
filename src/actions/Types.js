@@ -13,6 +13,7 @@ const types = {
         USER_NAME: 'USER_NAME',
         USER_AVATOR: 'USER_AVATOR',
         USER_PHONE: 'USER_PHONE',
+        USER_DEPARTMENT: 'USER_DEPARTMENT',
     },
 }
 

@@ -101,7 +101,8 @@ var thiz;
         GLOBAL.gv.setUserName(data.f_name,this.props.dispatch);　
         // GV.USER_NAME = data.f_name;
         GV.USER_DEPARTMENT_ID = data.f_department_id;
-        GV.USER_DEPARTMENT = data.f_department_name;
+        // GV.USER_DEPARTMENT = data.f_department_name;
+        global.gv.setDepartment(data.f_department_name,this,props.dispatch);
         GV.USER_PHONE = data.f_telephone;
         GV.USER_ACCOUNTS = data.f_account;
 
