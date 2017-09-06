@@ -16,9 +16,11 @@ import * as Progress from "react-native-progress";
 import Constants from "../../utils/Constants";
 import CallPhone from '../../native/CallPhone';
 import ToastUtils from '../../utils/ToastUtils';
+import {connect} from 'react-redux';
 
 const {height, width} = Dimensions.get('window');
-export default class MyView extends React.Component {
+
+class MyView extends React.Component {
     static navigationOptions = {
         header: null
     };
@@ -90,29 +92,31 @@ export default class MyView extends React.Component {
                                     <Image
                                         key={GV.USER_PORTRAIT}
                                         source={GV.USER_PORTRAIT
-                                        ? {
-                                            uri: GV.USER_PORTRAIT
-                                        }
-                                        : require('../../assets/img/setting/home/default_head_portrait.png')}
+                                            ? {
+                                                uri: GV.USER_PORTRAIT
+                                            }
+                                            : require('../../assets/img/setting/home/default_head_portrait.png')}
                                         indicator={Progress.Circle}
                                         style={styles.header}
                                         onLoaded={() => console.log('Image was loaded!')}
                                         onError={() => {
-                                        console.log('myView图片加载出错')
-                                    }}/>
+                                            console.log('myView图片加载出错')
+                                        }}/>
                                 </TouchableOpacity>
                             </View>
                             <View style={styles.info}>
                                 <View style={styles.name_post}>
                                     <View>
-                                        <Text style={styles.name}>{global
-                                                .gv
-                                                .getUserName()}</Text>
+                                        <Text style={styles.name}>{
+                                            GLOBAL.gv.getUserName(this.props.dispatch) == ''
+                                                ? this.props.userName
+                                                : GLOBAL.gv.getUserName()
+                                        }</Text>
                                     </View>
                                     <View>
                                         <Text style={styles.post}>{GV.USER_JOB
-                                                ? GV.USER_JOB
-                                                : '系统管理员'}</Text>
+                                            ? GV.USER_JOB
+                                            : '系统管理员'}</Text>
                                     </View>
                                 </View>
                                 <View style={styles.company_layout}>
@@ -499,3 +503,12 @@ const styles = StyleSheet.create({
         color: '#2298ED'
     }
 });
+
+
+function select(store) {
+    return {
+        userName: store.user.userName,
+    }
+}
+
+export default connect(select)(MyView);

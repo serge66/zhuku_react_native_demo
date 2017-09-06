@@ -1,11 +1,10 @@
 'use strict';
 
 import Type from './Types';
-import GV from "../utils/GlobalVariable";
 import ToastUtils from '../utils/ToastUtils';
 
 var Buffer = require('buffer').Buffer;
-let mDispatch ;
+let mDispatch;
 
 function _requestObj(opt) {
     var auth = 'Basic ' + new Buffer(opt.account + ':' + opt.pwd).toString('base64');
@@ -13,7 +12,7 @@ function _requestObj(opt) {
     console.log(auth + '---' + new Buffer(opt.account + ':' + opt.pwd).toString('base64'));
     // http://192.168.31.4:48080/zkpms-api/api/platform/security/token return new
     // Request('http://121.43.163.28:18080/zkpms-api/api/platform/security/token', {
-    return new Request(global.constants.BASE_URL+'api/platform/security/token', {
+    return new Request(global.constants.BASE_URL + 'api/platform/security/token', {
         method: 'POST',
         headers: {
             'Authorization': auth
@@ -28,8 +27,8 @@ function _status(response) {
     if (response.ok) {
         var headers = response.headers;
         console.log(headers.get('Content-Type'));
-        GV.ACCESS_TOKEN = headers.get('X-REST-TOKEN');
-        console.log('从header种获取的token：' + GV.ACCESS_TOKEN);
+        global.gv.setAccessToken(headers.get('X-REST-TOKEN'));
+        console.log('从header种获取的token：' + global.gv.getAccessToken());
 
         console.log(response.status);
         console.log(response.statusText);
@@ -65,7 +64,7 @@ function _json(res) {
 
 function _parseJson(responseJson) {
     // thiz.setState({isShowProgress: false});
-    console.log('responseJson:'+responseJson);
+    console.log('responseJson:' + responseJson);
     // console.log(responseJson.statusCode); alert(responseJson);
     if (responseJson.success) {
         // thiz._paramsToLastPage(); thiz     .props     .navigation .navigate('Home');
@@ -84,7 +83,7 @@ function _parseJson(responseJson) {
 }
 
 function _catch(error) {
-    console.log('error:'+error);
+    console.log('error:' + error);
     // thiz.setState({isShowProgress: false});
     ToastUtils.show(global.constants.SERVER_ERROR)
     mDispatch(loginError());
@@ -105,14 +104,14 @@ export function doLogin(opt) {
     }
 }
 
-export function isLogining() {
-    return {type: Type.LOGIN_IN_DOING}
+function isLogining() {
+    return {type: Type.login.LOGIN_IN_DOING}
 }
 
-export function loginSuccess(data) {
-    return {type: Type.LOGIN_IN_DONE, data: data}
+function loginSuccess(data) {
+    return {type: Type.login.LOGIN_IN_DONE, data: data}
 }
 
-export function loginError() {
-    return {type: Type.LOGIN_IN_ERROR}
+function loginError() {
+    return {type: Type.login.LOGIN_IN_ERROR}
 }

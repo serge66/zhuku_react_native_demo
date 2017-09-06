@@ -11,10 +11,11 @@ import {
     TouchableOpacity
 } from "react-native";
 import GV from "../../utils/GlobalVariable";
+import {connect} from 'react-redux';
 
 let lastBackPressed = 0;
 var thiz;
-export default class MessagesView extends React.Component {
+ class MessagesView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -97,7 +98,7 @@ export default class MessagesView extends React.Component {
 
     _saveData(responseJson) {
         var data = responseJson.data;
-        global.gv.setUserName(data.f_name);
+        GLOBAL.gv.setUserName(data.f_name,this.props.dispatch);　
         // GV.USER_NAME = data.f_name;
         GV.USER_DEPARTMENT_ID = data.f_department_id;
         GV.USER_DEPARTMENT = data.f_department_name;
@@ -197,3 +198,13 @@ const styles = StyleSheet.create({
         marginBottom: 40
     }
 });
+
+
+
+function select(store) {
+    return {
+        // userName: store.user.userName,
+    }
+}
+
+export default connect(select)(MessagesView);

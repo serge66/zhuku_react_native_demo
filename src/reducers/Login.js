@@ -14,7 +14,7 @@ const initialState = {
 
 export default function loginIn(state = initialState, action) {
     switch (action.type) {
-        case Types.LOGIN_IN_INIT:
+        case Types.login.LOGIN_IN_INIT:
             console.log('reducers login: init');
             return {
                 ...state,
@@ -24,7 +24,7 @@ export default function loginIn(state = initialState, action) {
                 isShowProgress:false,
             }
             break;
-        case Types.LOGIN_IN_DOING:
+        case Types.login.LOGIN_IN_DOING:
             console.log('reducers login: doing');
             return {
                 ...state,
@@ -34,7 +34,7 @@ export default function loginIn(state = initialState, action) {
                 isShowProgress:true,
             }
             break;
-        case Types.LOGIN_IN_DONE:
+        case Types.login.LOGIN_IN_DONE:
             console.log('reducers login: success');
             return {
                 ...state,
@@ -44,7 +44,7 @@ export default function loginIn(state = initialState, action) {
                 isShowProgress:false,
             }
             break;
-        case Types.LOGIN_IN_ERROR:
+        case Types.login.LOGIN_IN_ERROR:
             console.log('reducers login: error');
             return {
                 ...state,

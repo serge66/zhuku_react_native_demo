@@ -1,3 +1,5 @@
+'use strict';
+
 const Constants= {
     url: 'http://a.app.qq.com/o/simple.jsp?pkgname:user.zhuku.com',
     text: "全国建筑企业管理软件",
@@ -15,6 +17,7 @@ const Constants= {
 
     //------保存在store中的key,注意key中不可以使用_下划线
     USER_NAME:'USERNAME',
+    ACCESS_TOKEN:'ACCESSTOKEN',
     USER_DEPARTMENT_ID:'USERDEPARTMENTID',
     USER_DEPARTMENT:'USERDEPARTMENT',
     USER_PHONE:'USERPHONE',
