@@ -29,13 +29,13 @@ function _status(response) {
         var headers = response.headers;
         console.log(headers.get('Content-Type'));
         GV.ACCESS_TOKEN = headers.get('X-REST-TOKEN');
-        /*console.log('从header种获取的token：' + GV.ACCESS_TOKEN);
+        console.log('从header种获取的token：' + GV.ACCESS_TOKEN);
 
         console.log(response.status);
         console.log(response.statusText);
         console.log(response.type);
         console.log(response.url);
-        console.log('------------------');*/
+        console.log('------------------');
 
         // TODO 此处遍历在android中报错 undefined is not a function (evaluating
         // '_iterator[typeof Symbol === "function" ? Symbol.iterator : "@@iterator"]()')
@@ -53,7 +53,7 @@ function _status(response) {
         return Promise.resolve(response);
     } else {
         //TODO 此处登录失败会出现红色弹窗，需优化
-        ToastUtils.show(global.constants.SERVER_ERROR);
+        // ToastUtils.show(global.constants.SERVER_ERROR);
         // return Promise.reject(new Error('出错:' + response.statusText))
         return Promise.resolve(response);
     }
@@ -77,15 +77,17 @@ function _parseJson(responseJson) {
         // thiz     .props     .navigation     .dispatch(navigateAction);
 
     } else {
-        ToastUtils.show("网络连接失败，请重连后重试");
-        mDispatch(loginError);
+        // ToastUtils.show("网络连接失败，请重连后重试");
+        ToastUtils.show(responseJson.message);
+        mDispatch(loginError());
     }
 }
 
 function _catch(error) {
-    console.error(error);
+    console.log('error:'+error);
     // thiz.setState({isShowProgress: false});
-    mDispatch(loginError);
+    ToastUtils.show(global.constants.SERVER_ERROR)
+    mDispatch(loginError());
 }
 
 export function doLogin(opt) {

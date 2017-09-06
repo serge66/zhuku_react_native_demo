@@ -5,7 +5,7 @@ const types = {
     LOGIN_IN_DOING: 'LOGIN_IN_DOING',
     LOGIN_IN_DONE: 'LOGIN_IN_DONE',
     LOGIN_IN_ERROR: 'LOGIN_IN_ERROR',
-    LOGGIN_OUT: 'LOGGIN_OUT'
+    LOGIN_OUT: 'LOGIN_OUT'
 }
 
 export default types;

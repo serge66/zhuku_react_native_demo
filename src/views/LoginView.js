@@ -27,9 +27,9 @@ var thiz;
 class LoginView extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isShowProgress: false
-        };
+        // this.state = {
+        //     isShowProgress: false,
+        // };
         thiz = this;
     }
 
@@ -48,7 +48,7 @@ class LoginView extends React.Component {
     _requestObj() {
         var auth = 'Basic ' + new Buffer(account + ':' + pwd).toString('base64');
         console.log(auth + '--' + new Buffer('wxd:12345678').toString('base64'));
-        return new Request(global.constants.BASE_URL+'api/platform/security/token', {
+        return new Request(global.constants.BASE_URL + 'api/platform/security/token', {
             method: 'POST',
             headers: {
                 'Authorization': auth
@@ -97,7 +97,7 @@ class LoginView extends React.Component {
     }
 
     _parseJson(responseJson) {
-        thiz.setState({isShowProgress: false});
+        // thiz.setState({isShowProgress: false});
         console.log(responseJson);
         // console.log(responseJson.statusCode); alert(responseJson);
         if (responseJson.success) {
@@ -121,7 +121,7 @@ class LoginView extends React.Component {
 
     _catch(error) {
         console.error(error);
-        thiz.setState({isShowProgress: false});
+        // thiz.setState({isShowProgress: false});
     }
 
     _loginData() {
@@ -244,14 +244,14 @@ class LoginView extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        console.log(nextProps.status + "--" + nextState.data);
-        if (nextProps.status == 'doing' && nextProps.isSuccess == false) {
+        console.log(nextProps.status + "--" + nextState + '--this.props.status:' + this.props.status);
+        if (this.props.status != nextProps.status && nextProps.status == 'doing' && !nextProps.isSuccess) {
             console.log('11111111');
-            this.setState({isShowProgress: true});
-            return false;
+            // this.setState({isShowProgress: true});
+            return true;
         }
-        if (nextProps.status == 'success' && nextProps.isSuccess == true) {
-            this.setState({isShowProgress: false});
+        if (this.props.status != nextProps.status && nextProps.status == 'success' && nextProps.isSuccess) {
+            // this.setState({isShowProgress: false});
             let navigateAction = NavigationActions.reset({
                 index: 0,
                 actions: [
@@ -265,15 +265,16 @@ class LoginView extends React.Component {
             console.log('2222');
             return false;
         }
-        if (nextProps.status == 'error' && nextProps.isSuccess == false) {
-            this.setState({isShowProgress: false});
+        if (this.props.status != nextProps.status && nextProps.status == 'error' && !nextProps.isSuccess) {
+            // this.setState({isShowProgress: false});
             console.log('33333');
-            return false;
+            return true;
         }
 
         return true;
     }
-    componentWillUpdate(){
+
+    componentWillUpdate() {
         console.log('updata.......')
     }
 
@@ -358,7 +359,7 @@ class LoginView extends React.Component {
                     </TouchableOpacity>
 
                 </View>
-                {this.state.isShowProgress === true
+                {this.props.isShowProgress === true
                     ? (
                         <View style={[styles.progressContent, styles.flex]}>
                             <Progress.CircleSnail style={[styles.progress]} color={['#2196F3']} size={60}/>
@@ -476,7 +477,12 @@ const styles = StyleSheet.create({
 });
 
 function select(store) {
-    return {status: store.loginIn.status, isSuccess: store.loginIn.isSuccess, data: store.loginIn.data}
+    return {
+        status: store.loginIn.status,
+        isSuccess: store.loginIn.isSuccess,
+        data: store.loginIn.data,
+        isShowProgress:store.loginIn.isShowProgress,
+    }
 }
 
 export default connect(select)(LoginView);
