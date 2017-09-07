@@ -29,7 +29,7 @@ const homeTabNavigator = TabNavigator({
             tabBarLabel: '工作台',
             tabBarIcon: ({tintColor, focused}) => (<Image
                 source={focused
-                ? require('../assets/img/main/tabbar_settingselect.png')
+                ? require('../assets/img/main/tabbar_workbenchsel.png')
                 : require('../assets/img/main/tabbar_workbench.png')}
                 resizeMode={resizeMode}/>)
         }
