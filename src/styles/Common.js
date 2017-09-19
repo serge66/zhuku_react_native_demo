@@ -6,12 +6,23 @@
 
 import React from 'react';
 import {
-  StyleSheet,
-  PixelRatio,
-  Dimensions,
-} from 'react-native';
+    Platform,
+    StyleSheet,
+    PixelRatio,
+    Dimensions,
+} from 'react-native'
+
 var cell_w = Dimensions.get('window').width;
-var styles = StyleSheet.create({
+
+function adaptiveTopiOS() {
+    if (Platform.OS == 'ios') {
+        return 20
+    } else {
+        return 0
+    }
+}
+
+var commonStyles = StyleSheet.create({
     wrapper: {
         flex: 1,
     },
@@ -40,10 +51,10 @@ var styles = StyleSheet.create({
     navbar: {
         flexDirection: 'row',
         borderBottomColor: '#000000',
-        borderBottomWidth: 1/PixelRatio.get(),
+        borderBottomWidth: 1 / PixelRatio.get(),
     },
     justAlign: {
-        alignItems: 'center', 
+        alignItems: 'center',
         justifyContent: 'center',
     },
 
@@ -64,7 +75,11 @@ var styles = StyleSheet.create({
 
     flex1: {
         flex: 1,
-    }
-    
+    },
+    adaptiveTopiOS: {
+        paddingTop: adaptiveTopiOS(),
+        backgroundColor: '#ffffff'
+    },
 });
-module.exports = styles;
+
+export default  commonStyles;

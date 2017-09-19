@@ -16,6 +16,8 @@ export default class PeopleCenterView extends Component {
             style={{
                 fontSize: 16,
                 textAlignVertical: 'center',
+                alignItems:'center',
+                alignSelf:'center',
                 color: '#000',
             }}
             onPress={() => {

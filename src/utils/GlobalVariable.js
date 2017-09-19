@@ -1,6 +1,6 @@
 'use strict';
 
-import {userName,userDepartment} from '../actions/UserAction';
+import {userName, userDepartment, userToken} from '../actions/UserAction';
 
 const Gv = {
 
@@ -182,10 +182,9 @@ const Gv = {
      */
     activityCount: 0,
 
-    getAccessToken() {
-
+    getAccessToken(dispatch) {
         if (Gv.ACCESS_TOKEN == '') {
-            return _loadAccessToken();
+            return Gv._loadAccessToken(dispatch);
         } else {
             return Gv.ACCESS_TOKEN;
         }
@@ -211,7 +210,7 @@ const Gv = {
         // return _loadUserName();
 
         if (Gv.USER_NAME == '') {
-            return _loadUserName(dispatch);
+            return Gv._loadUserName(dispatch);
         } else {
             return Gv.USER_NAME;
         }
@@ -240,7 +239,7 @@ const Gv = {
     getDepartment(dispatch) {
 
         if (Gv.USER_DEPARTMENT == '') {
-            return _loadDepartment(dispatch);
+            return Gv._loadDepartment(dispatch);
         } else {
             return Gv.USER_DEPARTMENT;
         }
@@ -264,138 +263,153 @@ const Gv = {
             return;
         }
         dispatch(userDepartment(name));
-    }
-};
+    },
 
-function _loadAccessToken() {
-    var result = '';
+    _loadAccessToken(dispatch) {
+        var result = '';
 
-    global
-        .storage
-        .load({
-            key: global.constants.ACCESS_TOKEN,
+        global
+            .storage
+            .load({
+                key: global.constants.ACCESS_TOKEN,
 
-            // autoSync(默认为true)意味着在没有找到数据或数据过期时自动调用相应的sync方法
-            autoSync: false,
+                // autoSync(默认为true)意味着在没有找到数据或数据过期时自动调用相应的sync方法
+                autoSync: false,
 
-            // syncInBackground(默认为true)意味着如果数据过期， 在调用sync方法的同时先返回已经过期的数据。
-            // 设置为false的话，则等待sync方法提供的最新数据(当然会需要更多时间)。
-            syncInBackground: true,
+                // syncInBackground(默认为true)意味着如果数据过期， 在调用sync方法的同时先返回已经过期的数据。
+                // 设置为false的话，则等待sync方法提供的最新数据(当然会需要更多时间)。
+                syncInBackground: true,
 
-            // 你还可以给sync方法传递额外的参数 syncParams: {     extraFetchOptions: {         // 各种参数 },
-            // someFlag: true }
-        })
-        .then(ret => {
-            // 如果找到数据，则在then方法中返回 注意：这是异步返回的结果（不了解异步请自行搜索学习） 你只能在then这个方法内继续处理ret数据
-            // 而不能在then以外处理 也没有办法“变成”同步返回 你也可以使用“看似”同步的async/await语法
+                // 你还可以给sync方法传递额外的参数 syncParams: {     extraFetchOptions: {         // 各种参数 },
+                // someFlag: true }
+            })
+            .then(ret => {
+                // 如果找到数据，则在then方法中返回 注意：这是异步返回的结果（不了解异步请自行搜索学习） 你只能在then这个方法内继续处理ret数据
+                // 而不能在then以外处理 也没有办法“变成”同步返回 你也可以使用“看似”同步的async/await语法
 
-            console.log('获取store中ACCESS_TOKEN:' + ret);
-            // this.setState({user: ret});
-            result = ret;
-        })
-        .catch(err => {
-            //如果没有找到数据且没有sync方法， 或者有其他异常，则在catch中返回
-            console.log('获取store中ACCESS_TOKEN出错message:' + err.message);
-            console.log('获取store中ACCESS_TOKEN出错name:' + err.name);
-            switch (err.name) {
-                case 'NotFoundError':
-                    // TODO;
-                    break;
-                case 'ExpiredError':
-                    // TODO
-                    break;
-            }
-        })
-    console.log('result ACCESS_TOKEN:' + result);
-    return result;
-}
+                console.log('获取store中ACCESS_TOKEN:' + ret);
+                // this.setState({user: ret});
+                result = ret;
+                let opt = {
+                    'userToken': result,
+                    'userTokenStatus': 'done'
+                };
 
-function _loadUserName(dispatch) {
-    var result = '';
+                if (dispatch != undefined && dispatch != null && dispatch != '')
+                    dispatch(userToken(opt));
+            })
+            .catch(err => {
+                //如果没有找到数据且没有sync方法， 或者有其他异常，则在catch中返回
+                console.log('获取store中ACCESS_TOKEN出错message:' + err.message);
+                console.log('获取store中ACCESS_TOKEN出错name:' + err.name);
+                let opt = {
+                    'userToken': result,
+                    'userTokenStatus': 'error'
+                };
+                if (dispatch != undefined && dispatch != null && dispatch != '')
+                    dispatch(userToken(opt));
 
-    global
-        .storage
-        .load({
-            key: global.constants.USER_NAME,
+                switch (err.name) {
+                    case 'NotFoundError':
+                        // TODO;
+                        break;
+                    case 'ExpiredError':
+                        // TODO
+                        break;
+                }
+            })
+        console.log('result ACCESS_TOKEN:' + result);
+        return result;
+    },
 
-            // autoSync(默认为true)意味着在没有找到数据或数据过期时自动调用相应的sync方法
-            autoSync: false,
+    _loadUserName(dispatch) {
+        var result = '';
 
-            // syncInBackground(默认为true)意味着如果数据过期， 在调用sync方法的同时先返回已经过期的数据。
-            // 设置为false的话，则等待sync方法提供的最新数据(当然会需要更多时间)。
-            syncInBackground: true,
+        global
+            .storage
+            .load({
+                key: global.constants.USER_NAME,
 
-            // 你还可以给sync方法传递额外的参数 syncParams: {     extraFetchOptions: {         // 各种参数 },
-            // someFlag: true }
-        })
-        .then(ret => {
-            // 如果找到数据，则在then方法中返回 注意：这是异步返回的结果（不了解异步请自行搜索学习） 你只能在then这个方法内继续处理ret数据
-            // 而不能在then以外处理 也没有办法“变成”同步返回 你也可以使用“看似”同步的async/await语法
+                // autoSync(默认为true)意味着在没有找到数据或数据过期时自动调用相应的sync方法
+                autoSync: false,
 
-            console.log('获取store中usename:' + ret);
-            // this.setState({user: ret});
-            result = ret;
-            dispatch(userName(result));
-        })
-        .catch(err => {
-            //如果没有找到数据且没有sync方法， 或者有其他异常，则在catch中返回
-            console.log('!!!获取store中usename出错message:' + err.message);
-            console.log('!!!获取store中usename出错name:' + err.name);
-            switch (err.name) {
-                case 'NotFoundError':
-                    // TODO;
-                    break;
-                case 'ExpiredError':
-                    // TODO
-                    break;
-            }
-        })
-    console.log('result' + result);
-    return result;
-};
+                // syncInBackground(默认为true)意味着如果数据过期， 在调用sync方法的同时先返回已经过期的数据。
+                // 设置为false的话，则等待sync方法提供的最新数据(当然会需要更多时间)。
+                syncInBackground: true,
 
-function _loadDepartment(dispatch) {
-    var result = '';
+                // 你还可以给sync方法传递额外的参数 syncParams: {     extraFetchOptions: {         // 各种参数 },
+                // someFlag: true }
+            })
+            .then(ret => {
+                // 如果找到数据，则在then方法中返回 注意：这是异步返回的结果（不了解异步请自行搜索学习） 你只能在then这个方法内继续处理ret数据
+                // 而不能在then以外处理 也没有办法“变成”同步返回 你也可以使用“看似”同步的async/await语法
 
-    global
-        .storage
-        .load({
-            key: global.constants.USER_DEPARTMENT,
+                console.log('获取store中usename:' + ret);
+                // this.setState({user: ret});
+                result = ret;
+                dispatch(userName(result));
+            })
+            .catch(err => {
+                //如果没有找到数据且没有sync方法， 或者有其他异常，则在catch中返回
+                console.log('!!!获取store中usename出错message:' + err.message);
+                console.log('!!!获取store中usename出错name:' + err.name);
+                switch (err.name) {
+                    case 'NotFoundError':
+                        // TODO;
+                        break;
+                    case 'ExpiredError':
+                        // TODO
+                        break;
+                }
+            })
+        console.log('result' + result);
+        return result;
+    },
 
-            // autoSync(默认为true)意味着在没有找到数据或数据过期时自动调用相应的sync方法
-            autoSync: false,
+    _loadDepartment(dispatch) {
+        var result = '';
 
-            // syncInBackground(默认为true)意味着如果数据过期， 在调用sync方法的同时先返回已经过期的数据。
-            // 设置为false的话，则等待sync方法提供的最新数据(当然会需要更多时间)。
-            syncInBackground: true,
+        global
+            .storage
+            .load({
+                key: global.constants.USER_DEPARTMENT,
 
-            // 你还可以给sync方法传递额外的参数 syncParams: {     extraFetchOptions: {         // 各种参数 },
-            // someFlag: true }
-        })
-        .then(ret => {
-            // 如果找到数据，则在then方法中返回 注意：这是异步返回的结果（不了解异步请自行搜索学习） 你只能在then这个方法内继续处理ret数据
-            // 而不能在then以外处理 也没有办法“变成”同步返回 你也可以使用“看似”同步的async/await语法
+                // autoSync(默认为true)意味着在没有找到数据或数据过期时自动调用相应的sync方法
+                autoSync: false,
 
-            console.log('获取store中USER_DEPARTMENT:' + ret);
-            // this.setState({user: ret});
-            result = ret;
-            dispatch(userDepartment(result));
-        })
-        .catch(err => {
-            //如果没有找到数据且没有sync方法， 或者有其他异常，则在catch中返回
-            console.log('!!!获取store中USER_DEPARTMENT出错message:' + err.message);
-            console.log('!!!获取store中USER_DEPARTMENT出错name:' + err.name);
-            switch (err.name) {
-                case 'NotFoundError':
-                    // TODO;
-                    break;
-                case 'ExpiredError':
-                    // TODO
-                    break;
-            }
-        })
-    console.log('result' + result);
-    return result;
+                // syncInBackground(默认为true)意味着如果数据过期， 在调用sync方法的同时先返回已经过期的数据。
+                // 设置为false的话，则等待sync方法提供的最新数据(当然会需要更多时间)。
+                syncInBackground: true,
+
+                // 你还可以给sync方法传递额外的参数 syncParams: {     extraFetchOptions: {         // 各种参数 },
+                // someFlag: true }
+            })
+            .then(ret => {
+                // 如果找到数据，则在then方法中返回 注意：这是异步返回的结果（不了解异步请自行搜索学习） 你只能在then这个方法内继续处理ret数据
+                // 而不能在then以外处理 也没有办法“变成”同步返回 你也可以使用“看似”同步的async/await语法
+
+                console.log('获取store中USER_DEPARTMENT:' + ret);
+                // this.setState({user: ret});
+                result = ret;
+                dispatch(userDepartment(result));
+            })
+            .catch(err => {
+                //如果没有找到数据且没有sync方法， 或者有其他异常，则在catch中返回
+                console.log('!!!获取store中USER_DEPARTMENT出错message:' + err.message);
+                console.log('!!!获取store中USER_DEPARTMENT出错name:' + err.name);
+                switch (err.name) {
+                    case 'NotFoundError':
+                        // TODO;
+                        break;
+                    case 'ExpiredError':
+                        // TODO
+                        break;
+                }
+            })
+        console.log('result' + result);
+        return result;
+    },
+
 };
 
 global.gv = Gv;

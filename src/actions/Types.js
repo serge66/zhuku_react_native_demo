@@ -15,6 +15,14 @@ const types = {
         USER_PHONE: 'USER_PHONE',
         USER_DEPARTMENT: 'USER_DEPARTMENT',
     },
+    token:{
+        TOKEN:'TOKEN',
+    },
+    indexAll:{
+        ISINDEXING:'ISINDEXING',
+        INDEXSUCCESS:'INDEXSUCCESS',
+        INDEXERROR:'INDEXERROR',
+    },
 }
 
 export default types;

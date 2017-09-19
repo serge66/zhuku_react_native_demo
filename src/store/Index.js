@@ -1,6 +1,6 @@
 'use strict';
 
-import {applyMiddleware, createStore} from 'redux';
+import {applyMiddleware, createStore,compose} from 'redux';
 import thunk from 'redux-thunk';
 import {persistStore, autoRehydrate} from 'redux-persist';
 import {AsyncStorage} from 'react-native';
@@ -22,15 +22,14 @@ let createAppStore = applyMiddleware(...middlewares)(createStore);
 
 export default function configureStore(onComplete: () => void) {
     const store = autoRehydrate()(createAppStore)(rootReducer);
-    let opt = {
-        storage: AsyncStorage,
-        transform: [],
+    // let opt = {
+    //     storage: AsyncStorage,
+    //     transform: [],
         //whitelist: ['userStore'],
-    };
-    persistStore(store, opt, onComplete);
+    // };
+    // persistStore(store, opt, onComplete);
     return store;
 }
-
 
 /*
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);

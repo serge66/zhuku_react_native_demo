@@ -16,6 +16,15 @@ export default function loginIn(state = initialState, action) {
             return {
                 ...state,
                 userName: action.data,
+                userNameStatus: 'done',
+            }
+            break;
+        case Types.token.TOKEN:
+            console.log('reducers token: done');
+            return {
+                ...state,
+                token: action.data.userToken,
+                userTokenStatus: action.data.userTokenStatus,
             }
             break;
 

@@ -2,7 +2,6 @@
 
 import React from "react";
 import {
-    Dimensions,
     Image,
     StyleSheet,
     Text,
@@ -11,18 +10,18 @@ import {
     View
 } from "react-native";
 import ToastUtils from "../utils/ToastUtils.js";
-import * as Progress from "react-native-progress";
 import GV from "../utils/GlobalVariable";
 import Constants from "../utils/Constants";
 import {NavigationActions} from "react-navigation";
 import {doLogin} from '../actions/Login';
 import {connect} from 'react-redux';
 import ProgressDialogCS from '../component/ProgressDialogCS';
+import Utils from '../utils/Utils';
+import CommonStyles from '../styles/Common';
 
 var Buffer = require('buffer').Buffer;
 var account = '';
 var pwd = '';
-const {height, width} = Dimensions.get('window');
 var thiz;
 
 class LoginView extends React.Component {
@@ -39,11 +38,14 @@ class LoginView extends React.Component {
     };
 
     _getData() {
-        fetch('http://gl.zhu-ku.com/zhuku/ws/system/auth/getNewVersion/1').then((response) => response.json()).then((resopnseJson) => {
-            console.log(resopnseJson);
-        }).catch((error) => {
-            console.error(error)
-        })
+        fetch('http://gl.zhu-ku.com/zhuku/ws/system/auth/getNewVersion/1')
+            .then((response) => response.json())
+            .then((resopnseJson) => {
+                console.log(resopnseJson);
+            })
+            .catch((error) => {
+                console.error(error)
+            })
     }
 
     _requestObj() {
@@ -163,45 +165,48 @@ class LoginView extends React.Component {
                 'userPassword': this.state.pwd,
                 'appKey': this.state.key
             })
-        }).then((response) => response.json()).then((responseJson) => {
-            this.setState({isShowProgress: false});
-            console.log(responseJson);
-            console.log(responseJson.statusCode);
-            // alert(responseJson);
-            if (responseJson.statusCode === '0000') {
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                this.setState({isShowProgress: false});
+                console.log(responseJson);
+                console.log(responseJson.statusCode);
+                // alert(responseJson);
+                if (responseJson.statusCode === '0000') {
 
-                GV.ACCESS_TOKEN = responseJson.tokenCode;
-                if (responseJson.returnData != null) {
-                    GV.userAccount = responseJson.returnData.userAccount;
-                    GV.USER_ID = responseJson.returnData.userId;
-                    GV.USER_NAME = responseJson.returnData.userName;
-                    GV.USER_PORTRAIT = responseJson.returnData.userHeadImg;
-                    // GV.USER_JOB = responseJson.returnData.userHeadImg;
-                    GV.COMPANYNAME = responseJson.returnData.companyName;
+                    GV.ACCESS_TOKEN = responseJson.tokenCode;
+                    if (responseJson.returnData != null) {
+                        GV.userAccount = responseJson.returnData.userAccount;
+                        GV.USER_ID = responseJson.returnData.userId;
+                        GV.USER_NAME = responseJson.returnData.userName;
+                        GV.USER_PORTRAIT = responseJson.returnData.userHeadImg;
+                        // GV.USER_JOB = responseJson.returnData.userHeadImg;
+                        GV.COMPANYNAME = responseJson.returnData.companyName;
+                    }
+                    console.log("帐号：" + GV.userAccount + " id：" + GV.USER_ID + " 用户名：" + GV.USER_NAME);
+
+                    this._paramsToLastPage();
+                    this
+                        .props
+                        .navigation
+                        .navigate('Home');
+
+                    // let navigateAction = NavigationActions.reset({     index: 0,     actions: [
+                    // NavigationActions.navigate({routeName: 'Home'})  //or routeName:'Main' ] });
+                    // this.props.navigation.dispatch(navigateAction);
+
+                } else if (responseJson.statusCode === '1011') {
+                    ToastUtils.show("帐号或密码不正确");
+                } else {
+                    ToastUtils.show("网络连接失败，请重连后重试");
                 }
-                console.log("帐号：" + GV.userAccount + " id：" + GV.USER_ID + " 用户名：" + GV.USER_NAME);
-
-                this._paramsToLastPage();
-                this
-                    .props
-                    .navigation
-                    .navigate('Home');
-
-                // let navigateAction = NavigationActions.reset({     index: 0,     actions: [
-                // NavigationActions.navigate({routeName: 'Home'})  //or routeName:'Main' ] });
-                // this.props.navigation.dispatch(navigateAction);
-
-            } else if (responseJson.statusCode === '1011') {
-                ToastUtils.show("帐号或密码不正确");
-            } else {
-                ToastUtils.show("网络连接失败，请重连后重试");
-            }
-            // return responseJson.statusDesc;
-        }).catch((error) => {
-            console.error(error);
-            this.setState({isShowProgress: false});
-            // alert(error);
-        });
+                // return responseJson.statusDesc;
+            })
+            .catch((error) => {
+                console.error(error);
+                this.setState({isShowProgress: false});
+                // alert(error);
+            });
     }
 
     login_click() {
@@ -210,8 +215,8 @@ class LoginView extends React.Component {
         // this._getData(); this._paramsToLastPage();
 
         if (account == '' || pwd == '') {
-            account = 'SuperAdmin';
-            pwd = '12345678'
+            account = 'lsj';
+            pwd = '00000000'
         }
 
         let opt = {
@@ -246,12 +251,16 @@ class LoginView extends React.Component {
 
     shouldComponentUpdate(nextProps, nextState) {
         console.log(nextProps.status + "--" + nextState + '--this.props.status:' + this.props.status);
-        if (this.props.status != nextProps.status && nextProps.status == 'doing' && !nextProps.isSuccess) {
+        if (this.props.status != nextProps.status
+            && nextProps.status == 'doing'
+            && !nextProps.isSuccess) {
             console.log('11111111');
             // this.setState({isShowProgress: true});
             return true;
         }
-        if (this.props.status != nextProps.status && nextProps.status == 'success' && nextProps.isSuccess) {
+        if (this.props.status != nextProps.status
+            && nextProps.status == 'success'
+            && nextProps.isSuccess) {
             // this.setState({isShowProgress: false});
             let navigateAction = NavigationActions.reset({
                 index: 0,
@@ -266,7 +275,9 @@ class LoginView extends React.Component {
             console.log('2222');
             return false;
         }
-        if (this.props.status != nextProps.status && nextProps.status == 'error' && !nextProps.isSuccess) {
+        if (this.props.status != nextProps.status
+            && nextProps.status == 'error'
+            && !nextProps.isSuccess) {
             // this.setState({isShowProgress: false});
             console.log('33333');
             return true;
@@ -282,7 +293,7 @@ class LoginView extends React.Component {
     render() {
         return (
             <View style={[styles.flex, styles.posi]}>
-                <View style={[styles.flex, styles.top, styles.topContent]}>
+                <View style={[styles.flex, styles.top, styles.topContent, CommonStyles.adaptiveTopiOS]}>
                     <View style={styles.homePage}>
                         <TouchableOpacity
                             activeOpacity={Constants.ActiveOpacityNum}
@@ -384,23 +395,23 @@ const styles = StyleSheet.create({
     },
     homePage: {
         // flex: 1,
-        height: 80,
-        width: width,
-        marginTop: 20,
+        height: Utils.getHeight(80),
+        width: Utils.size.width,
+        marginTop: Utils.getHeight(20),
         // alignSelf: 'flex-end',
     },
     homePageText: {
         alignSelf: 'flex-end',
-        marginRight: 20,
+        marginRight: Utils.getWidth(20),
         color: '#10b2ff',
-        fontSize: 15
+        fontSize: Utils.getWidth(15)
     },
     content: {
         //     width: width,     height: height / 5,
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: height / 10
+        marginTop: Utils.size.height / 10
     },
     account_pwd: {
         flexDirection: 'row',
@@ -409,7 +420,7 @@ const styles = StyleSheet.create({
         width: '80%',
 
         // width: width,
-        height: height / 15
+        height: Utils.size.height / 15
     },
     account_pwd_line: {
         flexDirection: 'column',
@@ -418,19 +429,19 @@ const styles = StyleSheet.create({
         // flex: 1,
     },
     leftText: {
-        fontSize: 15,
+        fontSize: Utils.getWidth(15),
         color: '#000000',
         // width:'60%',
     },
     rightText: {
-        fontSize: 13,
+        fontSize: Utils.getWidth(13),
         color: '#aaaaaa',
         flex: 1,
-        marginLeft: 10
+        marginLeft: Utils.getWidth(10)
     },
     line: {
         height: 1,
-        width: 300,
+        width: Utils.getWidth(300),
         backgroundColor: '#e5e5e5'
     },
     loginLayout: {
@@ -438,22 +449,22 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#10b2ff',
-        height: 40,
-        width: 300,
-        marginTop: 20
+        height: Utils.getHeight(40),
+        width: Utils.getWidth(300),
+        marginTop: Utils.getHeight(20)
     },
     loginText: {
         color: '#ffffff',
-        fontSize: 15,
+        fontSize: Utils.getWidth(15),
         alignSelf: 'center'
     },
     forgotText: {
-        fontSize: 12,
+        fontSize: Utils.getWidth(12),
         color: '#aaaaaa',
-        marginTop: 20
+        marginTop: Utils.getHeight(20)
     },
     progress: {
-        margin: 10,
+        margin: Utils.getWidth(10),
         alignSelf: 'center'
     },
     progressContent: {
@@ -462,12 +473,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#55555555',
-        width: width,
-        height: height
+        width: Utils.size.width,
+        height: Utils.size.height
     },
     topContent: {
         position: 'absolute',
-        height: height
+        height: Utils.size.height
     }
 });
 

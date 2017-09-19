@@ -8,6 +8,7 @@ import ContactsView from "../views/contact/ContactsView.js";
 import MessagesView from "../views/message/MessagesView";
 import {Image} from "react-native";
 import {TabNavigator} from "react-navigation";
+import Utils from '../utils/Utils';
 
 const resizeMode = 'center'; //resizeMode enum('cover', 'contain', 'stretch', 'repeat', 'center')
 
@@ -18,8 +19,8 @@ const homeTabNavigator = TabNavigator({
             tabBarLabel: '消息',
             tabBarIcon: ({tintColor, focused}) => (<Image
                 source={focused
-                ? require('../assets/img/main/tabbar_message_light.png')
-                : require('../assets/img/main/tabbar_message.png')}
+                    ? require('../assets/img/main/tabbar_message_light.png')
+                    : require('../assets/img/main/tabbar_message.png')}
                 resizeMode={resizeMode}/>)
         }
     },
@@ -29,8 +30,8 @@ const homeTabNavigator = TabNavigator({
             tabBarLabel: '工作台',
             tabBarIcon: ({tintColor, focused}) => (<Image
                 source={focused
-                ? require('../assets/img/main/tabbar_workbenchsel.png')
-                : require('../assets/img/main/tabbar_workbench.png')}
+                    ? require('../assets/img/main/tabbar_workbenchsel.png')
+                    : require('../assets/img/main/tabbar_workbench.png')}
                 resizeMode={resizeMode}/>)
         }
     },
@@ -40,8 +41,8 @@ const homeTabNavigator = TabNavigator({
             tabBarLabel: '项目',
             tabBarIcon: ({tintColor, focused}) => (<Image
                 source={focused
-                ? require('../assets/img/main/tabbar_projectselect.png')
-                : require('../assets/img/main/tabbar_project.png')}
+                    ? require('../assets/img/main/tabbar_projectselect.png')
+                    : require('../assets/img/main/tabbar_project.png')}
                 resizeMode={resizeMode}/>)
         }
     },
@@ -51,8 +52,8 @@ const homeTabNavigator = TabNavigator({
             tabBarLabel: '联系人',
             tabBarIcon: ({tintColor, focused}) => (<Image
                 source={focused
-                ? require('../assets/img/main/tabbar_constant_light.png')
-                : require('../assets/img/main/tabbar_constant.png')}
+                    ? require('../assets/img/main/tabbar_constant_light.png')
+                    : require('../assets/img/main/tabbar_constant.png')}
                 resizeMode={resizeMode}/>)
         }
     },
@@ -62,8 +63,8 @@ const homeTabNavigator = TabNavigator({
             tabBarLabel: '我的',
             tabBarIcon: ({tintColor, focused}) => (<Image
                 source={focused
-                ? require('../assets/img/main/tabbar_settingselect.png')
-                : require('../assets/img/main/tabbar_setting.png')}
+                    ? require('../assets/img/main/tabbar_settingselect.png')
+                    : require('../assets/img/main/tabbar_setting.png')}
                 resizeMode={resizeMode}/>)
         }
     }
@@ -82,16 +83,22 @@ const homeTabNavigator = TabNavigator({
         showLabel: true,
         pressColor: '#6c6dff',
         pressOpcity: '0.5',
-        // iconStyle: {//设置后图片显示不完整     width: 20,     height: 25,     // margin:2, },
+        iconStyle: {//设置后图片显示不完整
+            // width: 20,
+            // height: 25,
+            margin: Utils.getHeight(1),
+        },
         style: {
             backgroundColor: '#fff', // TabBar 背景色
-            height: 60
+            height: Utils.getHeight(70),
+            paddingBottom: Utils.getHeight(1),
         },
         indicatorStyle: {
             height: 0, // 如TabBar下面显示有一条线，可以设高度为0后隐藏
         },
         labelStyle: {
-            fontSize: 12, // 文字大小
+            fontSize: Utils.getWidth(12), // 文字大小
+            padding:Utils.getWidth(1),
             // color: '#000',如果指出设置颜色，会覆盖activeTintColor、inactiveTintColor设置
         }
     }

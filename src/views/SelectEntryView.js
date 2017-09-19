@@ -12,9 +12,9 @@ import {
 } from "react-native";
 import {NavigationActions} from "react-navigation";
 import Constants from "../utils/Constants";
-const backAction = NavigationActions.back({key: 'Splash'});
+import Utils from '../utils/Utils';
 
-const {width, height} = Dimensions.get('window');
+const backAction = NavigationActions.back({key: 'Splash'});
 export default class SelectEntryView extends React.Component {
     constructor(props) {
         super(props);
@@ -181,21 +181,21 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'flex-start',
-        width: width,
-        height: height,
+        width: Utils.size.width,
+        height: Utils.size.height,
         // backgroundImage: `url(${imgUrl})`, backgroundColor:'#aaaaaa',
     },
     titleText: {
-        fontSize: 15,
+        fontSize: Utils.getWidth(15),
         color: '#000000',
         textAlign: 'center',
-        marginLeft: 10
+        marginLeft: Utils.getWidth(10)
     },
     ContentText: {
-        fontSize: 12,
+        fontSize: Utils.getWidth(12),
         color: '#aaaaaa',
         textAlign: 'center',
-        marginTop: 5
+        marginTop: Utils.getHeight(5)
     },
     titleLayout: {
         flexDirection: 'row',
@@ -203,12 +203,12 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     leftImage: {
-        width: 20,
-        height: 20
+        width: Utils.getWidth(20),
+        height: Utils.getHeight(20)
     },
     arrowImage: {
-        width: 10,
-        height: 10
+        width: Utils.getWidth(10),
+        height: Utils.getHeight(10)
     },
     contentLeftLayout: {
         flexDirection: 'column',
@@ -217,12 +217,12 @@ const styles = StyleSheet.create({
         flex: 1
     },
     contentLayout: {
-        marginLeft: 15,
-        marginRight: 30, //TODO 值和marginLeft应一样
-        paddingLeft: 15,
-        paddingRight: 15,
-        paddingTop: 10,
-        paddingBottom: 10,
+        marginLeft: Utils.getWidth(15),
+        marginRight: Utils.getWidth(15), //TODO 值和marginLeft应一样
+        paddingLeft: Utils.getWidth(15),
+        paddingRight: Utils.getWidth(15),
+        paddingTop: Utils.getHeight(10),
+        paddingBottom: Utils.getHeight(10),
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',

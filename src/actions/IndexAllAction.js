@@ -3,26 +3,14 @@
 import Type from './Types';
 import ToastUtils from '../utils/ToastUtils';
 
-var Buffer = require('buffer').Buffer;
 let mDispatch;
 
 function _requestObj(opt) {
-    var auth;
-    if (typeof opt=='string') {
-        auth = opt;
-        console.log('ssssssssss')
-    } else {
-        console.log('ddddd')
-        auth = 'Basic ' + new Buffer(opt.account + ':' + opt.pwd).toString('base64');
-    }
-    // var auth = 'Basic ' + new Buffer('lsj:12345678').toString('base64');
-    console.log(auth + '---' + new Buffer(opt.account + ':' + opt.pwd).toString('base64'));
-    // http://192.168.31.4:48080/zkpms-api/api/platform/security/token return new
-    // Request('http://121.43.163.28:18080/zkpms-api/api/platform/security/token', {
-    return new Request(global.constants.BASE_URL + 'api/platform/security/token', {
-        method: 'POST',
+
+    return new Request(global.constants.BASE_URL + 'api/admin/index', {
+        method: 'GET',
         headers: {
-            'Authorization': auth
+            'X-REST-TOKEN': opt
         },
         mode: 'cors',
         credentials: 'include'
@@ -34,8 +22,8 @@ function _status(response) {
     if (response.ok) {
         var headers = response.headers;
         console.log(headers.get('Content-Type'));
-        global.gv.setAccessToken(headers.get('X-REST-TOKEN'));
-        console.log('从header种获取的token：' + global.gv.getAccessToken(''));
+        // global.gv.setAccessToken(headers.get('X-REST-TOKEN'));
+        // console.log('从header种获取的token：' + global.gv.getAccessToken(''));
 
         console.log(response.status);
         console.log(response.statusText);
@@ -76,7 +64,7 @@ function _parseJson(responseJson) {
     if (responseJson.success) {
         // thiz._paramsToLastPage(); thiz     .props     .navigation .navigate('Home');
 
-        mDispatch(loginSuccess(responseJson));
+        mDispatch(indexSuccess(responseJson));
 
         // let navigateAction = NavigationActions.reset({     index: 0,     actions: [
         // NavigationActions.navigate({routeName: 'Home'}), //or routeName:'Main' ] });
@@ -85,21 +73,21 @@ function _parseJson(responseJson) {
     } else {
         // ToastUtils.show("网络连接失败，请重连后重试");
         ToastUtils.show(responseJson.message);
-        mDispatch(loginError());
+        mDispatch(indexError(responseJson));
     }
 }
 
 function _catch(error) {
-    console.log('error:' + error);
+    console.log('error indexall:' + error);
     // thiz.setState({isShowProgress: false});
-    ToastUtils.show(global.constants.SERVER_ERROR)
-    mDispatch(loginError());
+    // ToastUtils.show(global.constants.SERVER_ERROR)
+    mDispatch(indexError(error));
 }
 
-export function doLogin(opt) {
+export function doIndex(opt) {
     return (dispatch) => {
         mDispatch = dispatch;
-        dispatch(isLogining());
+        dispatch(isIndexing());
 
         var request = _requestObj(opt);
         let result = fetch(request)
@@ -111,14 +99,14 @@ export function doLogin(opt) {
     }
 }
 
-function isLogining() {
-    return {type: Type.login.LOGIN_IN_DOING}
+function isIndexing() {
+    return {type: Type.indexAll.ISINDEXING, status: 'init'}
 }
 
-function loginSuccess(data) {
-    return {type: Type.login.LOGIN_IN_DONE, data: data}
+function indexSuccess(data) {
+    return {type: Type.indexAll.INDEXSUCCESS, data: data, status: 'done'}
 }
 
-function loginError() {
-    return {type: Type.login.LOGIN_IN_ERROR}
+function indexError(data) {
+    return {type: Type.indexAll.INDEXERROR, data: data, status: 'error'}
 }

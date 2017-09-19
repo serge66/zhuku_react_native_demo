@@ -2,8 +2,6 @@
 
 import React from "react";
 import {
-    Dimensions,
-    Platform,
     ScrollView,
     StyleSheet,
     Text,
@@ -17,8 +15,8 @@ import Constants from "../../utils/Constants";
 import CallPhone from '../../native/CallPhone';
 import ToastUtils from '../../utils/ToastUtils';
 import {connect} from 'react-redux';
-
-const {height, width} = Dimensions.get('window');
+import Utils from '../../utils/Utils';
+import CommonStyles from '../../styles/Common';
 
 class MyView extends React.Component {
     static navigationOptions = {
@@ -80,7 +78,7 @@ class MyView extends React.Component {
 
     render() {
         return (
-            <View style={[styles.flex]}>
+            <View style={[styles.flex, CommonStyles.adaptiveTopiOS]}>
                 <ScrollView key={'scroll'} horizontal={false} scrollEnabled={true}>
                     <View style={[styles.contentContainer, styles.flex, styles.container]}>
                         <View style={[styles.top]}>
@@ -96,8 +94,10 @@ class MyView extends React.Component {
                                                 uri: GV.USER_PORTRAIT
                                             }
                                             : require('../../assets/img/setting/home/default_head_portrait.png')}
+                                        // : require('../../assets/img/login/Home_PageView_Bg.png')}
                                         indicator={Progress.Circle}
                                         style={styles.header}
+                                        resizeMode={'cover'}
                                         onLoaded={() => console.log('Image was loaded!')}
                                         onError={() => {
                                             console.log('myView图片加载出错')
@@ -394,21 +394,22 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        height: height / 4,
-        width: width
+        height: Utils.size.height / 4,
+        width: Utils.size.width,
     },
     header: {
-        width: 80,
-        height: 80,
-        marginLeft: 30,
-        borderRadius: 25
+        width: Utils.getWidth(80),
+        height: Utils.getHeight(80),
+        marginLeft: Utils.getWidth(30),
+        borderRadius: Utils.getWidth(40),
+        // backgroundColor:'#ff0000'
     },
 
     contentContainer: {
         // paddingVertical: 20
     },
     info: {
-        marginLeft: 15,
+        marginLeft: Utils.getWidth(15),
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'flex-start'
@@ -419,23 +420,23 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     name: {
-        fontSize: 15
+        fontSize: Utils.getWidth(15)
     },
     post: {
-        marginLeft: 10,
-        fontSize: 12
+        marginLeft: Utils.getWidth(10),
+        fontSize: Utils.getWidth(12)
     },
     company_layout: {
-        height: 50,
-        width: 220,
-        marginTop: 15
+        height: Utils.getHeight(50),
+        width: Utils.getWidth(220),
+        marginTop: Utils.getHeight(15)
     },
     company: {
-        fontSize: 12
+        fontSize: Utils.getWidth(12)
     },
     shadow: {
-        width: width,
-        height: 10,
+        width: Utils.size.width,
+        height: Utils.getHeight(10),
         backgroundColor: '#F1F1F1'
     },
     item: {
@@ -448,30 +449,31 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        width: width,
-        height: 45
+        width: Utils.size.width,
+        height: Utils.getHeight(45)
     },
     item_line: {
-        width: width,
-        height: 1,
+        width: Utils.size.width,
+        // height: StyleSheet.hairlineWidth,该用来定义当前平台最细的宽度。该属性用来设置边框或者两个组件之间的分割线,android有时不显示
+        height:Utils.getHeight(1),
         backgroundColor: '#aaaaaaaa',
         // marginTop: 10,
     },
     item_icon: {
-        width: 15,
-        height: 15,
-        margin: 10
+        width: Utils.getWidth(15),
+        height: Utils.getHeight(15),
+        margin: Utils.getWidth(10)
     },
     item_arrow: {
-        width: 15,
-        height: 15,
-        margin: 10
+        width: Utils.getWidth(15),
+        height: Utils.getHeight(15),
+        margin: Utils.getWidth(10)
     },
     item_title: {
-        fontSize: 15
+        fontSize: Utils.getWidth(15)
     },
     item_desc: {
-        fontSize: 13
+        fontSize: Utils.getWidth(13)
     },
     item_left: {
         flex: 1,
@@ -486,19 +488,19 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     bottom: {
-        width: width,
-        height: 80,
-        marginBottom: 40,
+        width: Utils.size.width,
+        height: Utils.getHeight(80),
+        marginBottom: Utils.getHeight(40),
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center'
     },
     bottom_info: {
-        fontSize: 13,
+        fontSize: Utils.getWidth(13),
         alignSelf: 'center'
     },
     bottom_info_num: {
-        fontSize: 13,
+        fontSize: Utils.getWidth(13),
         alignSelf: 'center',
         color: '#2298ED'
     }
@@ -507,7 +509,7 @@ const styles = StyleSheet.create({
 
 function select(store) {
     return {
-        userName: store.user.userName,
+        userName: store.userToken.userName,
     }
 }
 

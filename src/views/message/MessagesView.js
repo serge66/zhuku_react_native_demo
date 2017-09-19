@@ -12,10 +12,12 @@ import {
 } from "react-native";
 import GV from "../../utils/GlobalVariable";
 import {connect} from 'react-redux';
+import ToastUtils from '../../utils/ToastUtils';
 
 let lastBackPressed = 0;
 var thiz;
- class MessagesView extends React.Component {
+
+class MessagesView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -27,14 +29,14 @@ var thiz;
     static navigationOptions = {
         headerTitle: <Text
             style={{
-            fontSize: 16,
-            alignSelf: 'center',
-            textAlignVertical: 'center',
-            color: '#000'
-        }}
+                fontSize: 16,
+                alignSelf: 'center',
+                textAlignVertical: 'center',
+                color: '#000'
+            }}
             onPress={() => {
-            alert('点击了title')
-        }}>
+                alert('点击了title')
+            }}>
             消息</Text>,
         headerStyle: {
             backgroundColor: "white"
@@ -47,7 +49,7 @@ var thiz;
 
     _requestObj() {
         console.log('---' + GV.ACCESS_TOKEN);
-        return new Request(global.constants.BASE_URL+'api/admin/index/user', {
+        return new Request(global.constants.BASE_URL + 'api/admin/index/user', {
             method: 'GET',
             headers: {
                 'X-REST-TOKEN': GV.ACCESS_TOKEN
@@ -87,7 +89,8 @@ var thiz;
             return Promise.resolve(response)
         } else {
             console.log('---' + response);
-            return Promise.reject(new Error(response.statusText))
+            // return Promise.reject(new Error(response.statusText))
+            return Promise.resolve(response)
         }
     }
 
@@ -98,11 +101,11 @@ var thiz;
 
     _saveData(responseJson) {
         var data = responseJson.data;
-        GLOBAL.gv.setUserName(data.f_name,this.props.dispatch);　
+        GLOBAL.gv.setUserName(data.f_name, this.props.dispatch);
         // GV.USER_NAME = data.f_name;
         GV.USER_DEPARTMENT_ID = data.f_department_id;
         // GV.USER_DEPARTMENT = data.f_department_name;
-        global.gv.setDepartment(data.f_department_name,this.props.dispatch);
+        global.gv.setDepartment(data.f_department_name, this.props.dispatch);
         GV.USER_PHONE = data.f_telephone;
         GV.USER_ACCOUNTS = data.f_account;
 
@@ -114,7 +117,7 @@ var thiz;
             // 如果不指定过期时间，则会使用defaultExpires参数 如果设为null，则永不过期
             // expires: 1000 * 3600
         });
-        
+
         storage.save({
             key: global.constants.USER_DEPARTMENT_ID, // 注意:请不要在key中使用_下划线符号!
             data: data.f_department_id,
@@ -161,9 +164,11 @@ var thiz;
             .then(this._parseJson)
             .catch(this._catch);
     }
+
     login_click() {
         // this._requestUserInfo();
     }
+
     componentWillMount() {
         console.log('消息界面挂载');
         this._requestUserInfo();
@@ -199,7 +204,6 @@ const styles = StyleSheet.create({
         marginBottom: 40
     }
 });
-
 
 
 function select(store) {
