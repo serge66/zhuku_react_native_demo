@@ -1,11 +1,18 @@
 # zhuku_react_native_demo
-    
+
+
+  #### 此Demo已停止更新,请移步
+  [https://github.com/serge66/gank](https://github.com/serge66/gank)
+  
+
+
     Support
         iOS & Android
 
     Installation
         git clone https://github.com/serge66/zhuku_react_native_demo.git
-        cd zhuku_react_native_demo & npm install
+        cd zhuku_react_native_demo 
+        npm install
 
     Run
         react-native run-ios

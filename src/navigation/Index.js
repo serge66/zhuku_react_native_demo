@@ -9,8 +9,8 @@ import ServiceView from "../views/my/ServiceView";
 import NewFunctionView from "../views/my/NewFunctionView";
 import PeopleCenterView from "../views/my/PeopleCenterView";
 import {StackNavigator, TabNavigator} from "react-navigation";
-// import CardStackStyleInterpolator from "react-navigation/src/views/CardStack/CardStackStyleInterpolator";
-import CardStackStyleInterpolator from "react-navigation/src/views/CardStackStyleInterpolator";
+import CardStackStyleInterpolator from "react-navigation/src/views/CardStack/CardStackStyleInterpolator";
+//import CardStackStyleInterpolator from "react-navigation/src/views/CardStackStyleInterpolator";
 import HomeTabNavigator from "../navigation/HomeTabNavigator"
 
 const Stack = StackNavigator({
